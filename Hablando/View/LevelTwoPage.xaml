@@ -8,7 +8,101 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LevelTwoPage">
 
-    <Grid>
-        
-    </Grid>
+    <!--
+    <Border BorderThickness="0">
+
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1"
+                                 EndPoint="1,0">
+                <GradientStop Color="{DynamicResource BackgroundColor1}"
+                              Offset="0" />
+                <GradientStop Color="{DynamicResource BackgroundColor2}"
+                              Offset="1" />
+            </LinearGradientBrush>
+        </Border.Background>
+    -->
+        <Grid HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  Margin="0,0,0,5">
+                <Grid.Background>
+                    <SolidColorBrush Color="{DynamicResource TitleColor}" />
+
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                            Orientation="Horizontal">
+                    <Label Content="Bodovi:"
+                           HorizontalAlignment="Left"
+                           FontSize="15"
+                           VerticalAlignment="Center"
+                           Margin="15,0,0,0"
+                           Foreground="{DynamicResource LightBackgroundColorBrush}" />
+                    <TextBlock Text="{Binding Points}"
+                               HorizontalAlignment="Left"
+                               FontSize="15"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"
+                               Foreground="{DynamicResource LightBackgroundColorBrush}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <Label Grid.Column="2"
+                           Content="Preostalo vrijeme:"
+                           HorizontalAlignment="Right"
+                           FontSize="15"
+                           VerticalAlignment="Center"
+                           Margin="0,0,0,0"
+                           Foreground="{DynamicResource LightBackgroundColorBrush}" />
+                    <TextBlock Text="{Binding TimeRemaining, StringFormat={}{0:mm\\:ss}}"
+                               HorizontalAlignment="Right"
+                               FontSize="15"
+                               VerticalAlignment="Center"
+                               Margin="5,0,15,0"
+                               Foreground="{DynamicResource LightBackgroundColorBrush}" />
+                </StackPanel>
+                <Label Grid.Column="1"
+                       Content="Level 2"
+                       HorizontalAlignment="Center"
+                       FontSize="25"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource LightBackgroundColorBrush}" />
+
+
+            </Grid>
+
+
+            <Label Grid.Row="1"
+                   Content="Pronađite odgovarajući par navedenoj riječi."
+                   HorizontalAlignment="Center"
+                   FontSize="16"
+                   Margin="0,0,0,0"
+                   VerticalAlignment="Center"
+                   Foreground="{DynamicResource TitleColorBrush}" />
+            <Button Content="Odustani"
+                    Grid.Row="3"
+                    Click="CancelButtonClick"
+                    Margin="0,10,0,10"
+                    Style="{DynamicResource ProceedButtonStyle}" />
+
+
+        </Grid>
+   <!-- </Border> -->
 </Page>

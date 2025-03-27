@@ -6,12 +6,24 @@
         xmlns:local="clr-namespace:Hablando.View"
         mc:Ignorable="d"
         Title="Hablando" Height="500" Width="800">
-    
-    <Grid>
-      
 
-        <Frame x:Name="MainFrame"
-               Grid.Row="1"
-               NavigationUIVisibility="Hidden" />
-    </Grid>
+    <Border BorderThickness="0">
+
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1"
+                                 EndPoint="1,0">
+                <GradientStop Color="{DynamicResource BackgroundColor1}"
+                              Offset="0" />
+                <GradientStop Color="{DynamicResource BackgroundColor2}"
+                              Offset="1" />
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+
+
+            <Frame x:Name="MainFrame"
+                   NavigationUIVisibility="Hidden" />
+        </Grid>
+    </Border>
+    
 </Window>

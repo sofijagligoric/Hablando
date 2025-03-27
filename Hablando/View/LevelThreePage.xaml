@@ -9,6 +9,45 @@
       Title="LevelThreePage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Content="Bodovi:"
+                   HorizontalAlignment="Left"
+                   FontSize="15"
+                   VerticalAlignment="Center"
+                   Foreground="White" />
+            <Label Grid.Column="1"
+                   Content="Level 3"
+                   HorizontalAlignment="Center"
+                   FontSize="25"
+                   VerticalAlignment="Center"
+                   Foreground="White" />
+            <Label Grid.Column="2"
+                   Content="Tajmer"
+                   HorizontalAlignment="Right"
+                   FontSize="15"
+                   VerticalAlignment="Center"
+                   Foreground="White" />
+
+        </Grid>
+
+        <Label Grid.Row="1"
+               Content="Prevedite riječ na španski jezik."
+               HorizontalAlignment="Center"
+               FontSize="15"
+               VerticalAlignment="Center"
+               Foreground="White" />
+
     </Grid>
 </Page>

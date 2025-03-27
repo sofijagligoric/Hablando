@@ -7,14 +7,15 @@
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
 
-        <!-- Merging external resource dictionaries -->
+        
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Util/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+                <ResourceDictionary Source="/Util/SerbianSpanishDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- Define styles here -->
+       
             <Style x:Key="ProceedButtonStyle"
                    TargetType="Button">
                 <Setter Property="Template">
@@ -153,7 +154,7 @@
             </Style>
 
             <Style x:Key="HintedTextBoxStyle"
-                   BasedOn="{StaticResource MaterialDesignFilledTextBox}"
+                   
                    TargetType="TextBox">
                 <Setter Property="Background"
                         Value="{DynamicResource LightBackgroundColorBrush}" />
@@ -162,13 +163,23 @@
                 <Setter Property="FontFamily"
                         Value="Calibri" />
                 <Setter Property="FontSize"
-                        Value="13" />
-                
-                <Setter Property="md:HintAssist.Foreground"
+                        Value="15" />
+                <Setter Property="BorderThickness"
+                        Value="1" />
+                <Setter Property="Padding"
+                        Value="15,0,0,0" />
+                <Setter Property="BorderBrush"
+                        Value="{DynamicResource TitleColorBrush}" />
+                <Setter Property="BorderThickness"
+                        Value="0,0,0,2" />
+
+                <!--  <Setter Property="md:HintAssist.Foreground"
                         Value="{DynamicResource MouseOverBrush}" />
                 <Setter Property="md:TextFieldAssist.UnderlineBrush"
                         Value="{DynamicResource TitleColorBrush}" />
+                 -->
             </Style>
+               
 
         </ResourceDictionary>
 

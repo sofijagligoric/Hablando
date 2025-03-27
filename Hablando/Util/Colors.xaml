@@ -61,4 +61,18 @@
     <SolidColorBrush x:Key="MouseOverBrush"
                      Color="{StaticResource MouseOverColor}" />
 
+    <Color x:Key="CorrectColor">#499615</Color>
+    <SolidColorBrush x:Key="CorrectColorBrush"
+                     Color="{StaticResource CorrectColor}" />
+    <Color x:Key="IncorrectColor">#b02819</Color>
+    <SolidColorBrush x:Key="IncorrectColorBrush"
+                     Color="{StaticResource IncorrectColor}" />
+
+    <Color x:Key="BackgroundColor1">#f5bf38</Color>
+    <SolidColorBrush x:Key="BackgroundColor1Brush"
+                     Color="{StaticResource BackgroundColor1}" />
+    <Color x:Key="BackgroundColor2">#b55348</Color>
+    <SolidColorBrush x:Key="BackgroundColor2Brush"
+                     Color="{StaticResource BackgroundColor2}" />
+
 </ResourceDictionary>

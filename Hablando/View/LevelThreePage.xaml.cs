@@ -20,9 +20,12 @@ namespace Hablando.View
     /// </summary>
     public partial class LevelThreePage : Page
     {
-        public LevelThreePage()
+        private MainWindow _mainWindow;
+
+        public LevelThreePage(MainWindow mainWindow)
         {
             InitializeComponent();
+            _mainWindow = mainWindow;
         }
     }
 }

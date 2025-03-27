@@ -5,10 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Hablando.View"
+      xmlns:util="clr-namespace:Hablando.Util"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StartPage">
 
+    <Page.Resources>
+        
+        <util:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
+    
     <!--<Border>
         <Border.Background>
             <ImageBrush ImageSource="/Images/Background.jpg"
@@ -93,26 +99,83 @@
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
                         Width="auto"
-                        Margin="0,0,0,20">
-                <TextBox  Style="{DynamicResource HintedTextBoxStyle}"
-                          Width="250"
-                          Height="40"
-                          materialDesign:HintAssist.Hint="Unesite ime..." />
+                        Margin="0,0,0,20"
+                        Visibility="{Binding IsInputVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBox x:Name="ImeTextBox"
+                         Width="250"
+                         Height="40"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         Text="{Binding Player, UpdateSourceTrigger=PropertyChanged}"
+                         
+                GotFocus="ImeTextBox_GotFocus"
+                         LostFocus="ImeTextBox_LostFocus"
+                         Style="{DynamicResource HintedTextBoxStyle}"/>
                 <Button Content="Sačuvaj"
+                        Command="{Binding SavePlayerCommand}"
                         Style="{DynamicResource ProceedButtonStyle}" />
-
             </StackPanel>
+
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="auto"
+                        Grid.Row="1"
+                        Visibility="{Binding IsGameVisible, Converter={StaticResource BoolToVisibilityConverter}}" >
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Igrač:"
+                               HorizontalAlignment="Left"
+                               FontSize="25"
+                               VerticalAlignment="Center"
+                               Margin="15,0,0,0"
+                               Foreground="{DynamicResource TitleColorBrush}" />
+                        <TextBlock Text="{Binding Player}"
+                                   HorizontalAlignment="Left"
+                                   FontSize="25"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0"
+                                   TextWrapping="Wrap"
+                                   Foreground="{DynamicResource TitleColorBrush}" />
+           
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Bodovi:"
+                               HorizontalAlignment="Left"
+                               FontSize="25"
+                               VerticalAlignment="Center"
+                               Margin="15,0,0,0"
+                               Foreground="{DynamicResource TitleColorBrush}" />
+                        <TextBlock Text="{Binding Points}"
+                                   HorizontalAlignment="Left"
+                                   FontSize="25"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0"
+                                   TextWrapping="Wrap"
+                                   Foreground="{DynamicResource TitleColorBrush}" />
+
+                    </StackPanel>
+                    <Button Content="Novi igrač"
+                        Command="{Binding NewPlayerCommand}"
+                        Style="{DynamicResource ProceedButtonStyle}" />
+                </StackPanel>
+               
+
+           
             <StackPanel Grid.Row="2"
                         Width="auto"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
 
                 <Button Content="Level 1"
-                        Style="{DynamicResource Level1ButtonStyle}" />
+                        Style="{DynamicResource Level1ButtonStyle}"
+                        Click="Level1ButtonClick" />
                 <Button  Content="Level 2"
-                         Style="{DynamicResource Level2ButtonStyle}" />
+                         Style="{DynamicResource Level2ButtonStyle}"
+                         Click="Level2ButtonClick"/>
                 <Button  Content="Level 3"
-                         Style="{DynamicResource Level3ButtonStyle}" />
+                         Style="{DynamicResource Level3ButtonStyle}"
+                         Click="Level3ButtonClick"/>
 
             </StackPanel>
 
