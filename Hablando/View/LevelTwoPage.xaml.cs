@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hablando.ViewModel
+namespace Hablando.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LevelTwoPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LevelTwoPage : Page
     {
-        public MainWindow()
+        public LevelTwoPage()
         {
             InitializeComponent();
         }

@@ -1,0 +1,64 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="PrimaryColor">#96200b</Color>
+    <SolidColorBrush x:Key="PrimaryColorBrush"
+                     Color="{StaticResource PrimaryColor}" />
+
+    <Color x:Key="SecondaryColor">#631507</Color>
+    <SolidColorBrush x:Key="SecondaryColorBrush"
+                     Color="{StaticResource SecondaryColor}" />
+
+    <Color x:Key="PanelActiveColor">#913727</Color>
+    <SolidColorBrush x:Key="PanelActiveBrush"
+                     Color="{StaticResource PanelActiveColor}" />
+
+    <Color x:Key="Level1FirstColor">#55c92a</Color>
+    <SolidColorBrush x:Key="
+                   Level1FirstBrush"
+                     Color="{StaticResource Level1FirstColor}" />
+    <Color x:Key="Level1SecondColor">#378c18</Color>
+    <SolidColorBrush x:Key="
+           Level1SecondBrush"
+                     Color="{StaticResource Level1SecondColor}" />
+    <Color x:Key="Level1PanelActiveColor">#69c947</Color>
+    <SolidColorBrush x:Key="Level1PanelActiveBrush"
+                     Color="{StaticResource Level1PanelActiveColor}" />
+
+    <Color x:Key="Level2FirstColor">#db981a</Color>
+    <SolidColorBrush x:Key="
+           Level2FirstBrush"
+                     Color="{StaticResource Level2FirstColor}" />
+    <Color x:Key="Level2SecondColor">#966812</Color>
+    <SolidColorBrush x:Key="
+   Level2SecondBrush"
+                     Color="{StaticResource Level2SecondColor}" />
+    <Color x:Key="Level2PanelActiveColor">#e0a73a</Color>
+    <SolidColorBrush x:Key="Level2PanelActiveBrush"
+                     Color="{StaticResource Level2PanelActiveColor}" />
+
+    <Color x:Key="Level3FirstColor">#b5401d</Color>
+    <SolidColorBrush x:Key="
+          Level3FirstBrush"
+                     Color="{StaticResource Level3FirstColor}" />
+    <Color x:Key="Level3SecondColor">#913114</Color>
+    <SolidColorBrush x:Key="
+  Level3SecondBrush"
+                     Color="{StaticResource Level3SecondColor}" />
+    <Color x:Key="Level3PanelActiveColor">#bf5332</Color>
+    <SolidColorBrush x:Key="Level3PanelActiveBrush"
+                     Color="{StaticResource Level3PanelActiveColor}" />
+
+    <Color x:Key="TitleColor">#380d08</Color>
+    <SolidColorBrush x:Key="TitleColorBrush"
+                     Color="{StaticResource TitleColor}" />
+
+    <Color x:Key="LightBackgroundColor">#f5e9e9</Color>
+    <SolidColorBrush x:Key="LightBackgroundColorBrush"
+                     Color="{StaticResource LightBackgroundColor}" />
+
+    <Color x:Key="MouseOverColor">#8c5656</Color>
+    <SolidColorBrush x:Key="MouseOverBrush"
+                     Color="{StaticResource MouseOverColor}" />
+
+</ResourceDictionary>

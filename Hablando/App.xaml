@@ -2,8 +2,175 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Hablando"
-             StartupUri="MainWindow.xaml">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+
+        <!-- Merging external resource dictionaries -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Util/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Define styles here -->
+            <Style x:Key="ProceedButtonStyle"
+                   TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="120"
+                                    Height="40"
+                                    CornerRadius="20"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Foreground"
+                        Value="White" />
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="Cursor"
+                        Value="Hand" />
+                <Setter Property="Margin"
+                        Value="5px" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="0,1">
+                            <GradientStop Color="{DynamicResource PrimaryColor}"
+                                          Offset="0" />
+                            <GradientStop Color="{DynamicResource SecondaryColor}"
+                                          Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource PanelActiveBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="Level1ButtonStyle"
+                   TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="200"
+                                    Height="40"
+                                    CornerRadius="10"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Foreground"
+                        Value="White" />
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="Cursor"
+                        Value="Hand" />
+                <Setter Property="Margin"
+                        Value="5px" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="0,1">
+                            <GradientStop Color="{DynamicResource Level1FirstColor}"
+                                          Offset="0" />
+                            <GradientStop Color="{DynamicResource Level1SecondColor}"
+                                          Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource Level1PanelActiveBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="Level2ButtonStyle"
+                   TargetType="Button"
+                   BasedOn="{StaticResource Level1ButtonStyle}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="0,1">
+                            <GradientStop Color="{DynamicResource Level2FirstColor}"
+                                          Offset="0" />
+                            <GradientStop Color="{DynamicResource Level2SecondColor}"
+                                          Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource Level2PanelActiveBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <Style x:Key="Level3ButtonStyle"
+                   TargetType="Button"
+                   BasedOn="{StaticResource Level1ButtonStyle}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="0,1">
+                            <GradientStop Color="{DynamicResource Level3FirstColor}"
+                                          Offset="0" />
+                            <GradientStop Color="{DynamicResource Level3SecondColor}"
+                                          Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource Level3PanelActiveBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="HintedTextBoxStyle"
+                   BasedOn="{StaticResource MaterialDesignFilledTextBox}"
+                   TargetType="TextBox">
+                <Setter Property="Background"
+                        Value="{DynamicResource LightBackgroundColorBrush}" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource TitleColorBrush}" />
+                <Setter Property="FontFamily"
+                        Value="Calibri" />
+                <Setter Property="FontSize"
+                        Value="13" />
+                
+                <Setter Property="md:HintAssist.Foreground"
+                        Value="{DynamicResource MouseOverBrush}" />
+                <Setter Property="md:TextFieldAssist.UnderlineBrush"
+                        Value="{DynamicResource TitleColorBrush}" />
+            </Style>
+
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>
