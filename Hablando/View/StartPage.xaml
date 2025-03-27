@@ -37,49 +37,87 @@
                                   Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>-->
-            
-            <Grid>
-               
-                <Grid.Background>
+
+    <Grid>
+        <Grid>
+            <Image Source="/Images/Background.jpg"
+                   Stretch="Fill">
+                <Image.Effect>
+                    <BlurEffect Radius="10" />
+                </Image.Effect>
+            </Image>
+        </Grid>
+
+        <!-- Sadržaj koji nije zamagljen -->
+        <Grid HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <!--
+            <Grid.Background>
                     <ImageBrush ImageSource="/Images/Background.jpg" />
                 </Grid.Background>
                 <Grid.Effect>
                     <BlurEffect Radius="0" />
                 </Grid.Effect>
-                
-                
+            -->
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal"
-                            Width="auto">
-                    <TextBox  Style="{DynamicResource HintedTextBoxStyle}"
-                              Width="250"
-                              Height="40"
-                              materialDesign:HintAssist.Hint="Unesite ime..." />
-                    <Button Content="Sačuvaj"
-                            Style="{DynamicResource ProceedButtonStyle}" />
 
-                </StackPanel>
-                <StackPanel Grid.Row="1"
-                            Width="auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-                    <Button Content="Level 1"
-                            Style="{DynamicResource Level1ButtonStyle}" />
-                    <Button  Content="Level 2"
-                             Style="{DynamicResource Level2ButtonStyle}" />
-                    <Button  Content="Level 3"
-                             Style="{DynamicResource Level3ButtonStyle}" />
+            <StackPanel Grid.Row="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,30,0,20"
+                        >
+                <Label FontSize="50"
+                       Content="Hablando" 
+                       HorizontalAlignment="Center"
+                       FontFamily="Segoe Print"
+                       Foreground="{DynamicResource TitleColorBrush}"
+                       FontWeight="Bold"/>
+                <Label FontSize="20"
+                       Content="Zabavi se i nauči!"
+                       HorizontalAlignment="Center"
+                       FontFamily="Segoe Print"
+                       Foreground="{DynamicResource TitleColorBrush}" 
+                       FontWeight="Bold"/>
 
-                </StackPanel>
+            </StackPanel>
 
-            </Grid>
-        <!--</Border>
+            <StackPanel Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Width="auto"
+                        Margin="0,0,0,20">
+                <TextBox  Style="{DynamicResource HintedTextBoxStyle}"
+                          Width="250"
+                          Height="40"
+                          materialDesign:HintAssist.Hint="Unesite ime..." />
+                <Button Content="Sačuvaj"
+                        Style="{DynamicResource ProceedButtonStyle}" />
+
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Width="auto"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <Button Content="Level 1"
+                        Style="{DynamicResource Level1ButtonStyle}" />
+                <Button  Content="Level 2"
+                         Style="{DynamicResource Level2ButtonStyle}" />
+                <Button  Content="Level 3"
+                         Style="{DynamicResource Level3ButtonStyle}" />
+
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+    <!--</Border>
     </Border>-->
 </Page>
