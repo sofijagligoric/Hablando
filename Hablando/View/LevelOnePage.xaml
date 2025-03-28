@@ -95,7 +95,7 @@
             <Label Grid.Row="1"
                    Content="Izaberite riječi koje imaju isto značenje."
                    HorizontalAlignment="Center"
-                   FontSize="16"
+                   FontSize="18"
                    Margin="0,0,0,0"
                    VerticalAlignment="Center"
                    Foreground="{DynamicResource TitleColorBrush}" />

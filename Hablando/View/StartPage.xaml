@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Hablando.View"
       xmlns:util="clr-namespace:Hablando.Util"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="800"
       Title="StartPage">
 
     <Page.Resources>
@@ -79,13 +79,13 @@
                         VerticalAlignment="Center"
                         Margin="0,30,0,20"
                         >
-                <Label FontSize="50"
+                <Label FontSize="80"
                        Content="Hablando" 
                        HorizontalAlignment="Center"
                        FontFamily="Segoe Print"
                        Foreground="{DynamicResource TitleColorBrush}"
                        FontWeight="Bold"/>
-                <Label FontSize="20"
+                <Label FontSize="30"
                        Content="Zabavi se i nauči!"
                        HorizontalAlignment="Center"
                        FontFamily="Segoe Print"
@@ -101,9 +101,18 @@
                         Width="auto"
                         Margin="0,0,0,20"
                         Visibility="{Binding IsInputVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+
+                <Label FontSize="30"
+                       Content="Ime:"
+                       HorizontalAlignment="Center"
+                       Foreground="{DynamicResource TitleColorBrush}"
+                       FontWeight="DemiBold" />
                 <TextBox x:Name="ImeTextBox"
-                         Width="250"
+                         Width="230"
                          Height="40"
+                         Background="Transparent"
+                         FontSize="20"
+                         Margin="10,0,10,0"
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          Text="{Binding Player, UpdateSourceTrigger=PropertyChanged}"
@@ -128,12 +137,14 @@
                                FontSize="25"
                                VerticalAlignment="Center"
                                Margin="15,0,0,0"
+                               FontWeight="DemiBold"
                                Foreground="{DynamicResource TitleColorBrush}" />
                         <TextBlock Text="{Binding Player}"
                                    HorizontalAlignment="Left"
                                    FontSize="25"
                                    VerticalAlignment="Center"
-                                   Margin="10,0,0,0"
+                               FontWeight="DemiBold"
+                               Margin="10,0,0,0"
                                    TextWrapping="Wrap"
                                    Foreground="{DynamicResource TitleColorBrush}" />
            
@@ -142,7 +153,8 @@
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Bodovi:"
                                HorizontalAlignment="Left"
-                               FontSize="25"
+                           FontWeight="DemiBold"
+                           FontSize="25"
                                VerticalAlignment="Center"
                                Margin="15,0,0,0"
                                Foreground="{DynamicResource TitleColorBrush}" />
@@ -151,7 +163,8 @@
                                    FontSize="25"
                                    VerticalAlignment="Center"
                                    Margin="10,0,0,0"
-                                   TextWrapping="Wrap"
+                               FontWeight="DemiBold"
+                               TextWrapping="Wrap"
                                    Foreground="{DynamicResource TitleColorBrush}" />
 
                     </StackPanel>

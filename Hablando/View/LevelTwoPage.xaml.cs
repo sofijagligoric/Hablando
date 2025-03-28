@@ -27,7 +27,7 @@ namespace Hablando.View
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            DataContext = new Level2ViewModel();
+            DataContext = new Level2ViewModel(_mainWindow);
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)

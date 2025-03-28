@@ -1,21 +1,19 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using Hablando.Model;
+using Hablando.View;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using GalaSoft.MvvmLight;
-using Hablando.Model;
-using Hablando.View;
 
 namespace Hablando.ViewModel
 {
-    public class Level1ViewModel : ViewModelBase, INotifyPropertyChanged
+    internal class Level3ViewModel : ViewModelBase, INotifyPropertyChanged
     {
 
         private MainWindow _mainWindow;
@@ -48,7 +46,7 @@ namespace Hablando.ViewModel
 
         private DispatcherTimer _timer;
 
-        public Level1ViewModel(MainWindow mainWindow)
+        public Level3ViewModel(MainWindow mainWindow)
         {
             // Učitavanje reči iz ResourceDictionary
             Points = 0;
@@ -85,7 +83,7 @@ namespace Hablando.ViewModel
 
         private void TimerTick(object sender, EventArgs e)
         {
-            
+
             Points += 1;
             if (TimeRemaining.TotalSeconds > 0)
             {
@@ -96,8 +94,8 @@ namespace Hablando.ViewModel
             {
                 _timer.Stop();
                 _mainWindow.MainViewModel.Points += Points;
-               
-                GameoverWindow dialog2 = new GameoverWindow(Points, true);
+
+                GameoverWindow dialog2 = new GameoverWindow(Points, false);
                 bool? dialogResult2 = dialog2.ShowDialog();
                 if ((bool)dialogResult2)
                 {

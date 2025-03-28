@@ -10,11 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows;
+using Hablando.View;
 
 namespace Hablando.ViewModel
 {
     public class Level2ViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        private MainWindow _mainWindow;
+
+
         public ObservableCollection<WordPair> SRSPDictionary { get; set; }
         public ObservableCollection<string> SerbianWords { get; set; }
         public ObservableCollection<string> SpanishWords { get; set; }
@@ -42,10 +46,11 @@ namespace Hablando.ViewModel
 
         private DispatcherTimer _timer;
 
-        public Level2ViewModel()
+        public Level2ViewModel(MainWindow mainWindow)
         {
             // Učitavanje reči iz ResourceDictionary
             Points = 0;
+            _mainWindow = mainWindow;
             var dictionary = Application.Current.Resources.MergedDictionaries
                             .FirstOrDefault(d => d.Contains("SerbianSpanishDictionary"));
 
@@ -74,13 +79,12 @@ namespace Hablando.ViewModel
             _timer.Tick += TimerTick;
             _timer.Start();
 
-            Debug.WriteLine("-----------> Timer startovan.");
-
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
-            Debug.WriteLine($"Preostalo vreme: {TimeRemaining.TotalSeconds} sekundi");
+
+            Points += 1;
             if (TimeRemaining.TotalSeconds > 0)
             {
                 TimeRemaining = TimeRemaining.Subtract(TimeSpan.FromSeconds(1));
@@ -89,7 +93,18 @@ namespace Hablando.ViewModel
             else
             {
                 _timer.Stop();
-                MessageBox.Show($"Vreme je isteklo!\nOsvojeni bodovi: {Points}", "Kraj igre", MessageBoxButton.OK, MessageBoxImage.Information);
+                _mainWindow.MainViewModel.Points += Points;
+
+                GameoverWindow dialog2 = new GameoverWindow(Points, true);
+                bool? dialogResult2 = dialog2.ShowDialog();
+                if ((bool)dialogResult2)
+                {
+                    _mainWindow.MainFrame.Content = new LevelThreePage(_mainWindow);
+                }
+                else
+                {
+                    _mainWindow.MainFrame.Content = _mainWindow.StartPage;
+                }
             }
         }
 
@@ -98,7 +113,6 @@ namespace Hablando.ViewModel
             if (_timer != null && _timer.IsEnabled)
             {
                 _timer.Stop();
-                Debug.WriteLine("-----------> Timer zaustavljen.");
             }
         }
 
