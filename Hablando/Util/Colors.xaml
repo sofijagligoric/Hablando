@@ -75,4 +75,12 @@
     <SolidColorBrush x:Key="BackgroundColor2Brush"
                      Color="{StaticResource BackgroundColor2}" />
 
+    <Color x:Key="WordOptionColor1">#edcbad</Color>
+    <SolidColorBrush x:Key="WordOptionColorBrush1"
+                     Color="{StaticResource WordOptionColor1}" />
+
+    <Color x:Key="WordOptionColor2">#e6b081</Color>
+    <SolidColorBrush x:Key="WordOptionColorBrush2"
+                     Color="{StaticResource WordOptionColor2}" />
+
 </ResourceDictionary>

@@ -8,9 +8,12 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using Hablando.Model;
+using Hablando.Util;
 using Hablando.View;
 
 namespace Hablando.ViewModel
@@ -20,10 +23,23 @@ namespace Hablando.ViewModel
 
         private MainWindow _mainWindow;
 
-
+        /*
         public ObservableCollection<WordPair> SRSPDictionary { get; set; }
         public ObservableCollection<string> SerbianWords { get; set; }
         public ObservableCollection<string> SpanishWords { get; set; }
+        */
+
+        /*
+        private WordPair _selectedSerbianWord;
+        private WordPair _selectedSpanishWord;
+        */
+        private string _selectedSerbianWord;
+        private string _selectedSpanishWord;
+
+        public ObservableCollection<WordPair> WordPairs { get; set; }
+        public ObservableCollection<WordPair> SerbianWords { get; set; }
+        public ObservableCollection<WordPair> SpanishWords { get; set; }
+        public ICommand SelectWordCommand { get; }
         private int _points;
         public int Points
         {
@@ -55,6 +71,10 @@ namespace Hablando.ViewModel
             _mainWindow = mainWindow;
             var dictionary = Application.Current.Resources.MergedDictionaries
                             .FirstOrDefault(d => d.Contains("SerbianSpanishDictionary"));
+            LoadWords();
+
+            //     SelectWordCommand = new RelayCommand<WordPair>(SelectWord);
+            SelectWordCommand = new RelayCommand<String>(SelectWord);
 
             /*
             if (dictionary != null)
@@ -83,10 +103,130 @@ namespace Hablando.ViewModel
 
         }
 
+        private void LoadWords()
+        {
+            var dictionary = Application.Current.Resources.MergedDictionaries
+                             .FirstOrDefault(d => d.Contains("Recnik"));
+
+            if (dictionary != null)
+            {
+                var reci = dictionary["Recnik"] as string[];
+                var shuffledPairs = reci.Select(r =>
+                {
+                    var parts = r.Split(',');
+                    return new WordPair { Serbian = parts[0], Spanish = parts[1] };
+                }).OrderBy(x => Guid.NewGuid()).ToList();
+
+                WordPairs = new ObservableCollection<WordPair>(shuffledPairs);
+                SerbianWords = new ObservableCollection<WordPair>(WordPairs.OrderBy(x => Guid.NewGuid()));
+                SpanishWords = new ObservableCollection<WordPair>(WordPairs.OrderBy(x => Guid.NewGuid()));
+
+                OnPropertyChanged(nameof(SerbianWords));
+                OnPropertyChanged(nameof(SpanishWords));
+            }
+        }
+
+        /*
+        private async void SelectWord(WordPair word)
+        {
+            Debug.WriteLine($"-----> Kliknuto! { word}");
+            if (SerbianWords.Contains(word))
+            {
+                _selectedSerbianWord = word;
+            }
+            else if (SpanishWords.Contains(word))
+            {
+                _selectedSpanishWord = word;
+            }
+
+            if (_selectedSerbianWord != null && _selectedSpanishWord != null)
+            {
+                bool isMatch = _selectedSerbianWord.Spanish == _selectedSpanishWord.Spanish;
+
+                if (isMatch)
+                {
+                    _selectedSerbianWord.IsCorrect = true;
+                    _selectedSpanishWord.IsCorrect = true;
+                    Points++;
+
+                    await Task.Delay(1000);
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        SerbianWords.Remove(_selectedSerbianWord);
+                        SpanishWords.Remove(_selectedSpanishWord);
+
+                        // Dodajemo nove reči ako ih ima
+                        if (WordPairs.Count > 0)
+                        {
+                            var newPair = WordPairs.First();
+                            WordPairs.Remove(newPair);
+                            SerbianWords.Add(newPair);
+                            SpanishWords.Add(newPair);
+                        }
+                    });
+                }
+                else
+                {
+                    _selectedSerbianWord.IsIncorrect = true;
+                    _selectedSpanishWord.IsIncorrect = true;
+
+                    await Task.Delay(1000);
+
+                    _selectedSerbianWord.IsIncorrect = false;
+                    _selectedSpanishWord.IsIncorrect = false;
+                }
+
+                _selectedSerbianWord = null;
+                _selectedSpanishWord = null;
+            }
+        }
+        */
+        private void SelectWord(string word)
+        {
+            Debug.WriteLine($"-----> Kliknuto! {word}");
+
+            // Ako je reč na srpskom, setuj je
+            if (SerbianWords.Any(w => w.Serbian == word))
+            {
+                _selectedSerbianWord = word;
+            }
+            // Ako je reč na španskom, setuj je
+            else if (SpanishWords.Any(w => w.Spanish == word))
+            {
+                _selectedSpanishWord = word;
+            }
+
+            // Kada su oba selektovana, proveravamo da li su par
+            if (!string.IsNullOrEmpty(_selectedSerbianWord) && !string.IsNullOrEmpty(_selectedSpanishWord))
+            {
+                var matchingPair = WordPairs.FirstOrDefault(w => w.Serbian == _selectedSerbianWord && w.Spanish == _selectedSpanishWord);
+
+                if (matchingPair != null)
+                {
+                    Debug.WriteLine("✔ Tačan par!");
+
+                    Points++;
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        SerbianWords.Remove(matchingPair);
+                        SpanishWords.Remove(matchingPair);
+                    });
+                }
+                else
+                {
+                    Debug.WriteLine("❌ Pogrešan par!");
+                }
+
+                _selectedSerbianWord = null;
+                _selectedSpanishWord = null;
+            }
+        }
+
         private void TimerTick(object sender, EventArgs e)
         {
             
-            Points += 1;
+            
             if (TimeRemaining.TotalSeconds > 0)
             {
                 TimeRemaining = TimeRemaining.Subtract(TimeSpan.FromSeconds(1));

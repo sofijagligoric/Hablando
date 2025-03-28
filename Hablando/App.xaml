@@ -11,7 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Util/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
                 <ResourceDictionary Source="/Util/SerbianSpanishDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
@@ -179,7 +179,52 @@
                         Value="{DynamicResource TitleColorBrush}" />
                  -->
             </Style>
-               
+
+
+            <Style x:Key="Level1OptionStyle"
+                   TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150"
+                                    Height="50"
+                                    CornerRadius="1"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource TitleColorBrush}" />
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="Cursor"
+                        Value="Hand" />
+                <Setter Property="Margin"
+                        Value="10px" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="0,1">
+                            <GradientStop Color="{DynamicResource WordOptionColor1}"
+                                          Offset="0" />
+                            <GradientStop Color="{DynamicResource WordOptionColor2}"
+                                          Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource PanelActiveBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
         </ResourceDictionary>
 

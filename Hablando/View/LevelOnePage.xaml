@@ -4,9 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hablando.View"
+      xmlns:util="clr-namespace:Hablando.Util"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="800"
       Title="LevelOnePage">
+
+    <Page.Resources>
+
+        <util:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+    </Page.Resources>
 
     <!--
     <Border
@@ -90,6 +96,8 @@
                 
 
             </Grid>
+            
+            
 
             
             <Label Grid.Row="1"
@@ -99,7 +107,48 @@
                    Margin="0,0,0,0"
                    VerticalAlignment="Center"
                    Foreground="{DynamicResource TitleColorBrush}" />
-            <Button Content="Odustani"
+
+        <Grid Grid.Row="2"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+        
+                <ItemsControl Grid.Column="0"
+                              ItemsSource="{Binding SerbianWords}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding Serbian}"
+                                    Style="{DynamicResource Level1OptionStyle}"
+                                Command="{Binding DataContext.SelectWordCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                CommandParameter="{Binding Serbian}"
+                                Background="{Binding IsCorrect, Converter={StaticResource BooleanToColorConverter}, ConverterParameter=True}"
+                                   />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <ItemsControl Grid.Column="1"
+                              ItemsSource="{Binding SpanishWords}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding Spanish}"
+                                Style="{DynamicResource Level1OptionStyle}"
+                                Command="{Binding DataContext.SelectWordCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                CommandParameter="{Binding Spanish}"
+                                Background="{Binding IsCorrect, Converter={StaticResource BooleanToColorConverter}, ConverterParameter=True}"
+                                />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+               
+        </Grid>
+
+
+        <Button Content="Odustani"
                     Grid.Row="3"
                     Click="CancelButtonClick"
                     Margin="0,10,0,10"

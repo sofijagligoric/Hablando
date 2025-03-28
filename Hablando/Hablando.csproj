@@ -82,7 +82,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\WordPair.cs" />
+    <Compile Include="Util\BooleanToColorConverter .cs" />
     <Compile Include="Util\BoolToVisibilityConverter.cs" />
+    <Compile Include="Util\RelayCommand.cs" />
     <Compile Include="ViewModel\Level1ViewModel.cs" />
     <Compile Include="ViewModel\Level2ViewModel.cs" />
     <Compile Include="ViewModel\Level3ViewModel.cs" />
