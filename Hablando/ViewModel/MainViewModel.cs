@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Hablando.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,10 @@ namespace Hablando.ViewModel
         private int _points;
         private bool _isInputVisible = true;
         private bool _isGameVisible = false;
+        private readonly NavigationService _navigationService;
+
+        public ICommand NavigateHomeCommand { get; }
+        public ICommand NavigateNextLevelCommand { get; }
 
         public string Player
         {
@@ -45,8 +50,8 @@ namespace Hablando.ViewModel
 
         public MainViewModel()
         {
-            SavePlayerCommand = new RelayCommand(SavePlayer);
-            NewPlayerCommand = new RelayCommand(NewPlayer);
+            SavePlayerCommand = new GalaSoft.MvvmLight.Command.RelayCommand(SavePlayer);
+            NewPlayerCommand = new GalaSoft.MvvmLight.Command.RelayCommand(NewPlayer);
             Points = 0;
             Player = string.Empty;
         }

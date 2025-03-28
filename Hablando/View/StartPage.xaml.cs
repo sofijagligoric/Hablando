@@ -1,4 +1,5 @@
-﻿using Hablando.ViewModel;
+﻿using Hablando.Util;
+using Hablando.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hablando.View
@@ -21,13 +21,13 @@ namespace Hablando.View
     /// </summary>
     public partial class StartPage : Page
     {
-        private MainWindow _mainWindow;
+        private readonly NavigationService _navigationService;
 
-        public StartPage(MainWindow mainWindow)
+        public StartPage(MainViewModel viewModel, NavigationService navigationService)
         {
             InitializeComponent();
-            _mainWindow = mainWindow;
-            DataContext = mainWindow.MainViewModel;
+            DataContext = viewModel;
+            _navigationService = navigationService;
         }
 
         private void ImeTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -50,17 +50,17 @@ namespace Hablando.View
 
         private void Level1ButtonClick(object sender, RoutedEventArgs e)
         {
-            _mainWindow.MainFrame.Content = new LevelOnePage(_mainWindow);
+            _navigationService.NavigateToLevelOne();
         }
 
         private void Level2ButtonClick(object sender, RoutedEventArgs e)
         {
-            _mainWindow.MainFrame.Content = new LevelTwoPage(_mainWindow);
+            _navigationService.NavigateToLevelTwo();
         }
 
         private void Level3ButtonClick(object sender, RoutedEventArgs e)
         {
-            _mainWindow.MainFrame.Content = new LevelThreePage(_mainWindow);
+            _navigationService.NavigateToLevelThree();
         }
     }
 }

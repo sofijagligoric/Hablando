@@ -1,22 +1,21 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using Hablando.Model;
+using Hablando.Util;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
-using GalaSoft.MvvmLight;
-using Hablando.Model;
-using Hablando.Util;
 
 namespace Hablando.ViewModel
 {
-    public class Level1ViewModel : ViewModelBase, INotifyPropertyChanged
+    internal class Level3ViewModel : ViewModelBase, INotifyPropertyChanged
     {
+
         private readonly NavigationService _navigationService;
         private readonly MainViewModel _mainViewModel;
 
@@ -41,7 +40,7 @@ namespace Hablando.ViewModel
         private readonly DispatcherTimer _timer;
         public ICommand CancelCommand { get; }
 
-        public Level1ViewModel(NavigationService navigationService, MainViewModel mainViewModel)
+        public Level3ViewModel(NavigationService navigationService, MainViewModel mainViewModel)
         {
             _navigationService = navigationService;
             _mainViewModel = mainViewModel;
@@ -64,6 +63,7 @@ namespace Hablando.ViewModel
             else
             {
                 _timer.Stop();
+                // MessageBox.Show($"Vreme je isteklo!\nOsvojeni bodovi: {Points}", "Kraj igre", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

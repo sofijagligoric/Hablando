@@ -1,4 +1,5 @@
-﻿using Hablando.ViewModel;
+﻿using Hablando.Util;
+using Hablando.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,21 +21,21 @@ namespace Hablando.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        /*
-        public string PlayerName { get; set; }
-        public int Points {  get; set; }
-        */
-        public StartPage StartPage { get; set; }
-        public MainViewModel MainViewModel { get; set; }
+        public MainViewModel MainViewModel { get; }
+        private readonly NavigationService _navigationService;
+        private readonly StartPage _startPage;
 
         public MainWindow()
         {
             InitializeComponent();
-            MainViewModel = new MainViewModel(); 
-            StartPage = new StartPage(this); 
-            MainFrame.Content = StartPage;
-        }
 
+            MainViewModel = new MainViewModel();
+            _startPage = new StartPage(MainViewModel);
+            _navigationService = new NavigationService(MainFrame, _startPage, MainViewModel);
+
+            DataContext = MainViewModel;
+            MainFrame.Content = _startPage;
+        }
 
     }
 }

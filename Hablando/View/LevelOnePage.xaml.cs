@@ -1,4 +1,5 @@
-﻿using Hablando.ViewModel;
+﻿using Hablando.Util;
+using Hablando.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hablando.View
@@ -22,6 +22,13 @@ namespace Hablando.View
     /// </summary>
     public partial class LevelOnePage : Page
     {
+
+        public LevelOnePage(NavigationService navigationService, MainViewModel mainViewModel)
+        {
+            InitializeComponent();
+            DataContext = new Level1ViewModel(navigationService, mainViewModel);
+        }
+        /*
         private MainWindow _mainWindow;
      
 
@@ -37,11 +44,11 @@ namespace Hablando.View
             if (DataContext is Level1ViewModel viewModel)
             {
                 viewModel.StopTimer();
-                _mainWindow.MainViewModel.Points += viewModel.Points;
+               // _mainWindow.MainViewModel.Points += viewModel.Points;
             }
             _mainWindow.MainFrame.Content = _mainWindow.StartPage;
         }
 
-       
+       */
     }
 }

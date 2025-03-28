@@ -101,8 +101,8 @@
                    Foreground="{DynamicResource TitleColorBrush}" />
             <Button Content="Odustani"
                     Grid.Row="3"
-                    Click="CancelButtonClick"
-                    Margin="0,10,0,10"
+                Command="{Binding CancelCommand}"
+                Margin="0,10,0,10"
                     Style="{DynamicResource ProceedButtonStyle}" />
 
 

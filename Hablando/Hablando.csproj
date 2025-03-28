@@ -83,9 +83,16 @@
     </ApplicationDefinition>
     <Compile Include="Model\WordPair.cs" />
     <Compile Include="Util\BoolToVisibilityConverter.cs" />
+    <Compile Include="Util\NavigationService.cs" />
+    <Compile Include="Util\RelayCommand.cs" />
+    <Compile Include="ViewModel\GameoverViewModel.cs" />
     <Compile Include="ViewModel\Level1ViewModel.cs" />
     <Compile Include="ViewModel\Level2ViewModel.cs" />
+    <Compile Include="ViewModel\Level3ViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\GameoverWindow.xaml.cs">
+      <DependentUpon>GameoverWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LevelOnePage.xaml.cs">
       <DependentUpon>LevelOnePage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Util\SerbianSpanishDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GameoverWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

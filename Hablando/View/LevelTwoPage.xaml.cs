@@ -1,4 +1,5 @@
-﻿using Hablando.ViewModel;
+﻿using Hablando.Util;
+using Hablando.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hablando.View
@@ -21,6 +21,7 @@ namespace Hablando.View
     /// </summary>
     public partial class LevelTwoPage : Page
     {
+        /*
         private MainWindow _mainWindow;
 
         public LevelTwoPage(MainWindow mainWindow)
@@ -39,7 +40,13 @@ namespace Hablando.View
             }
             _mainWindow.MainFrame.Content = _mainWindow.StartPage;
         }
+        */
 
+        public LevelTwoPage(NavigationService navigationService, MainViewModel mainViewModel)
+        {
+            InitializeComponent();
+            DataContext = new Level2ViewModel(navigationService, mainViewModel);
+        }
 
     }
 }

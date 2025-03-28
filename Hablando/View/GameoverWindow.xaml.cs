@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace Hablando.View
 {
     /// <summary>
-    /// Interaction logic for LevelThreePage.xaml
+    /// Interaction logic for GameoverWindow.xaml
     /// </summary>
-    public partial class LevelThreePage : Page
+    public partial class GameoverWindow : Window
     {
-        public LevelThreePage(NavigationService navigationService, MainViewModel mainViewModel)
+        public GameoverWindow(NavigationService navigationService, Page currentPage, bool hasNextLevel)
         {
             InitializeComponent();
-            DataContext = new Level3ViewModel(navigationService, mainViewModel);
+            DataContext = new GameoverViewModel(navigationService, currentPage, hasNextLevel);
         }
     }
 }
