@@ -10,6 +10,57 @@
         <System:String>sunce,sol</System:String>
         <System:String>majka,madre</System:String>
         <System:String>otac,padre</System:String>
+        <System:String>jabuka,manzana</System:String>
+        <System:String>knjiga,libro</System:String>
+        <System:String>auto,coche</System:String>
+        <System:String>prozor,ventana</System:String>
+        <System:String>vrata,puerta</System:String>
+        <System:String>voda,agua</System:String>
+        <System:String>vino,vino</System:String>
+        <System:String>more,mar</System:String>
+        <System:String>riba,pez</System:String>
+        <System:String>ptica,pájaro</System:String>
+        <System:String>cvet,flor</System:String>
+        <System:String>drvo,árbol</System:String>
+        <System:String>sto,mesa</System:String>
+        <System:String>olovka,bolígrafo</System:String>
+        <System:String>sat,reloj</System:String>
+        <System:String>telefon,teléfono</System:String>
+        <System:String>krevet,cama</System:String>
+        <System:String>zid,pared</System:String>
+        <System:String>tepih,alfombra</System:String>
+        <System:String>oblak,nube</System:String>
+        <System:String>planina,montaña</System:String>
+        <System:String>reka,río</System:String>
+        <System:String>grad,ciudad</System:String>
+        <System:String>ulica,calle</System:String>
+        <System:String>trgovina,tienda</System:String>
+        <System:String>novac,dinero</System:String>
+        <System:String>čovek,hombre</System:String>
+        <System:String>žena,mujer</System:String>
+        <System:String>dete,niño</System:String>
+        <System:String>brat,hermano</System:String>
+        <System:String>sestra,hermana</System:String>
+        <System:String>ujak,tío</System:String>
+        <System:String>tetka,tía</System:String>
+        <System:String>baka,abuela</System:String>
+        <System:String>deka,abuelo</System:String>
+        <System:String>škola,escuela</System:String>
+        <System:String>učitelj,maestro</System:String>
+        <System:String>student,estudiante</System:String>
+        <System:String>posao,trabajo</System:String>
+        <System:String>bolnica,hospital</System:String>
+        <System:String>lekar,médico</System:String>
+        <System:String>voće,fruta</System:String>
+        <System:String>povrće,verdura</System:String>
+        <System:String>hrana,comida</System:String>
+        <System:String>meso,carne</System:String>
+        <System:String>sir,queso</System:String>
+        <System:String>hleb,pan</System:String>
+        <System:String>puter,mantequilla</System:String>
+        <System:String>mlijeko,leche</System:String>
+        <System:String>kafa,café</System:String>
+        <System:String>čaj,té</System:String>
 
     </x:Array>
 

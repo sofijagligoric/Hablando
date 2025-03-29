@@ -186,7 +186,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="150"
+                            <Border Width="200"
                                     Height="50"
                                     CornerRadius="1"
                                     Background="{TemplateBinding Background}">
@@ -205,7 +205,7 @@
                 <Setter Property="Cursor"
                         Value="Hand" />
                 <Setter Property="Margin"
-                        Value="10px" />
+                        Value="0,0,20,10" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <LinearGradientBrush StartPoint="0,0"

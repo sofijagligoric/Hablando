@@ -9,29 +9,39 @@ namespace Hablando.Model
 {
     public class WordPair : INotifyPropertyChanged
     {
-        private bool _isCorrect;
-        private bool _isIncorrect;
-
         public string Serbian { get; set; }
         public string Spanish { get; set; }
 
-        public bool IsCorrect
+        public WordPair(string serbian, string spanish) { 
+            Serbian = serbian;
+            Spanish = spanish;
+            IsCorrect = 0;
+        }
+
+        public WordPair() { 
+            IsCorrect = 0;
+        
+        }
+
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+
+        private int _isCorrect;
+        public int IsCorrect
         {
             get => _isCorrect;
             set
             {
                 _isCorrect = value;
                 OnPropertyChanged(nameof(IsCorrect));
-            }
-        }
-
-        public bool IsIncorrect
-        {
-            get => _isIncorrect;
-            set
-            {
-                _isIncorrect = value;
-                OnPropertyChanged(nameof(IsIncorrect));
             }
         }
 

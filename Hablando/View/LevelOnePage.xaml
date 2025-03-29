@@ -11,7 +11,7 @@
 
     <Page.Resources>
 
-        <util:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+        <util:IntToColorConverter x:Key="IntToColorConverter" />
     </Page.Resources>
 
     <!--
@@ -104,7 +104,7 @@
                    Content="Izaberite riječi koje imaju isto značenje."
                    HorizontalAlignment="Center"
                    FontSize="18"
-                   Margin="0,0,0,0"
+                   Margin="0,0,0,20"
                    VerticalAlignment="Center"
                    Foreground="{DynamicResource TitleColorBrush}" />
 
@@ -121,12 +121,11 @@
                               ItemsSource="{Binding SerbianWords}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Content="{Binding Serbian}"
+                            <Button Content="{Binding }"
                                     Style="{DynamicResource Level1OptionStyle}"
                                 Command="{Binding DataContext.SelectWordCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                CommandParameter="{Binding Serbian}"
-                                Background="{Binding IsCorrect, Converter={StaticResource BooleanToColorConverter}, ConverterParameter=True}"
-                                   />
+                                CommandParameter="{Binding }"
+                                Background="{Binding IsCorrect, Converter={StaticResource IntToColorConverter}}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -135,11 +134,11 @@
                               ItemsSource="{Binding SpanishWords}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Content="{Binding Spanish}"
+                            <Button Content="{Binding }"
                                 Style="{DynamicResource Level1OptionStyle}"
                                 Command="{Binding DataContext.SelectWordCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                CommandParameter="{Binding Spanish}"
-                                Background="{Binding IsCorrect, Converter={StaticResource BooleanToColorConverter}, ConverterParameter=True}"
+                                CommandParameter="{Binding }"
+                                Background="{Binding IsCorrect, Converter={StaticResource IntToColorConverter}}"
                                 />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
