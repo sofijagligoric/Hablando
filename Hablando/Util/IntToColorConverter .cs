@@ -22,7 +22,7 @@ namespace Hablando.Util
                 else if (isCorrect == 2)
                     return Brushes.LightCoral;
             }
-            return Brushes.LightGray;
+            return (Brush)Application.Current.Resources["Level1BakgroundColor"];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

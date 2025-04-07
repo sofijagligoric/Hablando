@@ -15,7 +15,17 @@
                 <ResourceDictionary Source="/Util/SerbianSpanishDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-       
+            <LinearGradientBrush x:Key="Level1BakgroundColor"
+                                 StartPoint="0,0"
+                                 EndPoint="0,1">
+                <GradientStop Color="#bcd8eb"
+                              Offset="0" />
+                <GradientStop Color="#dae5ed"
+                              Offset="1" />
+                
+            </LinearGradientBrush>
+
+
             <Style x:Key="ProceedButtonStyle"
                    TargetType="Button">
                 <Setter Property="Template">
@@ -188,7 +198,7 @@
                         <ControlTemplate TargetType="Button">
                             <Border Width="200"
                                     Height="50"
-                                    CornerRadius="1"
+                                    CornerRadius="5"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
                                                   HorizontalAlignment="Center" />
@@ -206,22 +216,12 @@
                         Value="Hand" />
                 <Setter Property="Margin"
                         Value="0,0,20,10" />
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush StartPoint="0,0"
-                                             EndPoint="0,1">
-                            <GradientStop Color="{DynamicResource WordOptionColor1}"
-                                          Offset="0" />
-                            <GradientStop Color="{DynamicResource WordOptionColor2}"
-                                          Offset="1" />
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
+
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver"
                              Value="True">
                         <Setter Property="Background"
-                                Value="{DynamicResource PanelActiveBrush}" />
+                                Value="{DynamicResource Level3PanelActiveBrush}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>

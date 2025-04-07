@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\SelectableWord.cs" />
     <Compile Include="Model\WordPair.cs" />
     <Compile Include="Util\IntToColorConverter .cs" />
     <Compile Include="Util\BoolToVisibilityConverter.cs" />

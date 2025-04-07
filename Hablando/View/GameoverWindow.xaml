@@ -16,9 +16,9 @@
         <Border.Background>
             <LinearGradientBrush StartPoint="0,1"
                                  EndPoint="1,0">
-                <GradientStop Color="#dbd814"
+                <GradientStop Color="#f2f2a0"
                               Offset="0" />
-                <GradientStop Color="#cfa00c"
+                <GradientStop Color="#f2c2a0"
                               Offset="1" />
             </LinearGradientBrush>
         </Border.Background>
@@ -37,7 +37,7 @@
                            TextAlignment="Center"
                            FontSize="18"
                            FontWeight="DemiBold"
-                           Text="Vrijeme isteklo!"
+                           Text="{Binding Message}"
                            TextWrapping="Wrap"
                            Margin="0,0,0,10"
                            Foreground="{DynamicResource TitleColorBrush}" />

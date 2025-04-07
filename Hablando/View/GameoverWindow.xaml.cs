@@ -22,14 +22,16 @@ namespace Hablando.View
 
          public int Points { get; set; }
         public bool HasNextLevel { get; }
+        public string Message { get; set; }
         // private MainWindow _mainWindow;
 
-        public GameoverWindow(int points, bool hasNextLevel)
+        public GameoverWindow(int points, bool hasNextLevel, string message)
         {
             InitializeComponent();
             Points = points;
             DataContext = this;
             HasNextLevel = hasNextLevel;
+            Message = message;
            // _mainWindow = mainWindow;
         }
 

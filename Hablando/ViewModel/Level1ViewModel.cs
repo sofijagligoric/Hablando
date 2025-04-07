@@ -23,28 +23,22 @@ namespace Hablando.ViewModel
 
         private MainWindow _mainWindow;
 
-        
+        /* 
+         
+         public ObservableCollection<string> SerbianWords { get; set; }
+         public ObservableCollection<string> SpanishWords { get; set; }
+        */
+        public ObservableCollection<SelectableWord> SerbianWords { get; set; }
+        public ObservableCollection<SelectableWord> SpanishWords { get; set; }
         public ObservableCollection<WordPair> WordPairs { get; set; }
-        public ObservableCollection<string> SerbianWords { get; set; }
-        public ObservableCollection<string> SpanishWords { get; set; }
+        private SelectableWord _selectedSerbianWord;
+        private SelectableWord _selectedSpanishWord;
+
+        public Dictionary<string, WordPair> WordMap { get; set; } = new Dictionary<string, WordPair>();
         private List<WordPair> AvailableWordPairs { get; set; }
         private const int InitialWordCount = 5;
-        private string _selectedSerbianWord;
-        private string _selectedSpanishWord;
-
-        /*
-        private WordPair _selectedSerbianWord;
-        private WordPair _selectedSpanishWord;
-        */
-
-
-        /*
-
-        public ObservableCollection<WordPair> WordPairs { get; set; }
-        public ObservableCollection<WordPair> SerbianWords { get; set; }
-        public ObservableCollection<WordPair> SpanishWords { get; set; }
-        */
-
+       // private string _selectedSerbianWord;
+       // private string _selectedSpanishWord;
 
         public ICommand SelectWordCommand { get; }
         private int _points;
@@ -73,17 +67,16 @@ namespace Hablando.ViewModel
 
         public Level1ViewModel(MainWindow mainWindow)
         {
-            // Učitavanje reči iz ResourceDictionary
             Points = 0;
             _mainWindow = mainWindow;
             var dictionary = Application.Current.Resources.MergedDictionaries
                             .FirstOrDefault(d => d.Contains("SerbianSpanishDictionary"));
             LoadWords();
 
-            //     SelectWordCommand = new RelayCommand<WordPair>(SelectWord);
-            SelectWordCommand = new RelayCommand<String>(SelectWord);
+            //  SelectWordCommand = new RelayCommand<String>(SelectWord);
+            SelectWordCommand = new RelayCommand<SelectableWord>(SelectWord);
 
-            
+
             TimeRemaining = TimeSpan.FromMinutes(2);
             _timer = new DispatcherTimer
             {
@@ -93,57 +86,7 @@ namespace Hablando.ViewModel
             _timer.Start();
 
         }
-        /*
-
-        private void LoadWords()
-        {
-            var dictionary = Application.Current.Resources.MergedDictionaries
-                             .FirstOrDefault(d => d.Contains("Recnik"));
-
-            if (dictionary != null)
-            {
-                var reci = dictionary["Recnik"] as string[];
-                var shuffledPairs = reci.Select(r =>
-                {
-                    var parts = r.Split(',');
-                    return new WordPair { Serbian = parts[0], Spanish = parts[1] };
-                }).OrderBy(x => Guid.NewGuid()).ToList();
-
-                WordPairs = new ObservableCollection<WordPair>(shuffledPairs);
-                SerbianWords = new ObservableCollection<WordPair>(WordPairs.OrderBy(x => Guid.NewGuid()));
-                SpanishWords = new ObservableCollection<WordPair>(WordPairs.OrderBy(x => Guid.NewGuid()));
-
-                OnPropertyChanged(nameof(SerbianWords));
-                OnPropertyChanged(nameof(SpanishWords));
-            }
-        }
-        */
-        /*
-        private void LoadWords()
-        {
-            var dictionary = Application.Current.Resources.MergedDictionaries
-                             .FirstOrDefault(d => d.Contains("Recnik"));
-
-            if (dictionary != null)
-            {
-                var reci = dictionary["Recnik"] as string[];
-                AvailableWordPairs = reci.Select(r =>
-                {
-                    var parts = r.Split(',');
-                    return new WordPair( parts[0],parts[1] );
-                }).OrderBy(x => Guid.NewGuid()).ToList();
-
-                WordPairs = new ObservableCollection<WordPair>(AvailableWordPairs.Take(InitialWordCount));
-                AvailableWordPairs.RemoveRange(0, InitialWordCount);
-
-                SerbianWords = new ObservableCollection<WordPair>(WordPairs.OrderBy(x => Guid.NewGuid()));
-                SpanishWords = new ObservableCollection<WordPair>(WordPairs.OrderBy(x => Guid.NewGuid()));
-
-                OnPropertyChanged(nameof(SerbianWords));
-                OnPropertyChanged(nameof(SpanishWords));
-            }
-        }
-        */
+       
         private void LoadWords()
         {
             var dictionary = Application.Current.Resources.MergedDictionaries
@@ -156,11 +99,11 @@ namespace Hablando.ViewModel
                 {
                     var parts = r.Split(',');
                     return new WordPair(parts[0], parts[1]);
-                }).OrderBy(x => Guid.NewGuid()).ToList();
+                }).OrderBy(_ => Guid.NewGuid()).ToList();
 
                 WordPairs = new ObservableCollection<WordPair>();
-                SerbianWords = new ObservableCollection<string>();
-                SpanishWords = new ObservableCollection<string>();
+                SerbianWords = new ObservableCollection<SelectableWord>();
+                SpanishWords = new ObservableCollection<SelectableWord>();
 
                 LoadNextBatch();
             }
@@ -168,237 +111,101 @@ namespace Hablando.ViewModel
 
         private void LoadNextBatch()
         {
-            /*
             if (AvailableWordPairs.Count == 0) return;
-
             var nextBatch = AvailableWordPairs.Take(InitialWordCount).ToList();
             AvailableWordPairs.RemoveRange(0, nextBatch.Count);
+
+            WordPairs.Clear();
+            SerbianWords.Clear();
+            SpanishWords.Clear();
+            WordMap.Clear();
 
             foreach (var pair in nextBatch)
             {
                 WordPairs.Add(pair);
-                SerbianWords.Add(pair.Serbian);
-                SpanishWords.Add(pair.Spanish);
+                WordMap[pair.SerbianWord.Text] = pair;
+                WordMap[pair.SpanishWord.Text] = pair;
             }
 
-            OnPropertyChanged(nameof(SerbianWords));
-            OnPropertyChanged(nameof(SpanishWords));
-            */
-
-            if (AvailableWordPairs.Count == 0) return;
-
-            var nextBatch = AvailableWordPairs.Take(InitialWordCount).ToList();
-            AvailableWordPairs.RemoveRange(0, nextBatch.Count);
-
-            foreach (var pair in nextBatch)
-            {
-                WordPairs.Add(pair); // VAŽNO: Dodajemo u WordPairs kako bi SelectWord radio
-            }
-
-            // Nasumično mešamo srpske i španske reči pre nego što ih dodamo
-            var shuffledSerbian = WordPairs.Select(x => x.Serbian).OrderBy(x => Guid.NewGuid()).ToList();
-            var shuffledSpanish = WordPairs.Select(x => x.Spanish).OrderBy(x => Guid.NewGuid()).ToList();
-
-            SerbianWords.Clear();
-            SpanishWords.Clear();
+            var shuffledSerbian = nextBatch.Select(x => x.SerbianWord).OrderBy(_ => Guid.NewGuid()).ToList();
+            var shuffledSpanish = nextBatch.Select(x => x.SpanishWord).OrderBy(_ => Guid.NewGuid()).ToList();
 
             foreach (var word in shuffledSerbian) SerbianWords.Add(word);
             foreach (var word in shuffledSpanish) SpanishWords.Add(word);
-
-            OnPropertyChanged(nameof(SerbianWords));
-            OnPropertyChanged(nameof(SpanishWords));
         }
-
-        private void SelectWord(string word)
+        private void SelectWord(object obj)
         {
-            /*
-            Debug.WriteLine($"-----> Kliknuto! {word}");
+            if (!(obj is SelectableWord selected)) return;
 
-            // Ako je reč na srpskom, setuj je
-            if (SerbianWords.Any(w => w.Serbian == word))
-            {
-                _selectedSerbianWord = word;
-            }
-            // Ako je reč na španskom, setuj je
-            else if (SpanishWords.Any(w => w.Spanish == word))
-            {
-                _selectedSpanishWord = word;
-            }
+            if (SerbianWords.Contains(selected)) _selectedSerbianWord = selected;
+            else if (SpanishWords.Contains(selected)) _selectedSpanishWord = selected;
 
-            // Kada su oba selektovana, proveravamo da li su par
-            if (!string.IsNullOrEmpty(_selectedSerbianWord) && !string.IsNullOrEmpty(_selectedSpanishWord))
+            if (_selectedSerbianWord != null && _selectedSpanishWord != null)
             {
-                var matchingPair = WordPairs.FirstOrDefault(w => w.Serbian == _selectedSerbianWord && w.Spanish == _selectedSpanishWord);
+                var pair = WordPairs.FirstOrDefault(p =>
+                    p.SerbianWord == _selectedSerbianWord &&
+                    p.SpanishWord == _selectedSpanishWord);
 
-                /*
-                if (matchingPair != null)
+                if (pair != null)
                 {
-                    Debug.WriteLine("✔ Tačan par!");
-
-                    Points++;
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        SerbianWords.Remove(matchingPair);
-                        SpanishWords.Remove(matchingPair);
-                    });
-                }
-                else
-                {
-                    Debug.WriteLine("❌ Pogrešan par!");
-                }
-                */
-
-            /*
-
-            if (matchingPair != null)
-            {
-                Points++;
-
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    SerbianWords.Remove(matchingPair);
-                    SpanishWords.Remove(matchingPair);
-                });
-
-                // Ako su pogođena 2 para, dodaj novi par
-                if (AvailableWordPairs.Any())
-                {
-                    var newPair = AvailableWordPairs.First();
-                    AvailableWordPairs.RemoveAt(0);
-
-                    SerbianWords.Add(newPair);
-                    SpanishWords.Add(newPair);
-                }
-            }
-            */
-
-            /*
-
-                  if (matchingPair != null)
-                  {
-                      matchingPair.IsCorrect = 1; // Obeležavanje tačnih odgovora
-                      Points++;
-
-                      Application.Current.Dispatcher.Invoke(async () =>
-                      {
-                          await Task.Delay(1000); 
-
-                          SerbianWords.Remove(matchingPair);
-                          SpanishWords.Remove(matchingPair);
-
-                          matchingPair.IsCorrect = 0;
-
-                          // Dodavanje novog para ako ih još ima
-                          if (AvailableWordPairs.Any())
-                          {
-                              var newPair = AvailableWordPairs.First();
-                              AvailableWordPairs.RemoveAt(0);
-
-                              SerbianWords.Add(newPair);
-                              SpanishWords.Add(newPair);
-                          }
-                      });
-                  }
-                  else
-                  {
-                      // Pogrešan par - privremeno označi crvenom
-                      var wrongSerbian = SerbianWords.FirstOrDefault(w => w.Serbian == _selectedSerbianWord);
-                      var wrongSpanish = SpanishWords.FirstOrDefault(w => w.Spanish == _selectedSpanishWord);
-
-                      if (wrongSerbian != null) wrongSerbian.IsCorrect = 2;
-                      if (wrongSpanish != null) wrongSpanish.IsCorrect = 2;
-
-                      Application.Current.Dispatcher.Invoke(async () =>
-                      {
-                          await Task.Delay(1000); 
-                          if (wrongSerbian != null) wrongSerbian.IsCorrect = 0;
-                          if (wrongSpanish != null) wrongSpanish.IsCorrect = 0;
-                      });
-                  }
-
-
-                  _selectedSerbianWord = null;
-                  _selectedSpanishWord = null;
-
-              }
-
-              */
-            Debug.WriteLine($"-----> Kliknuto! {word}");
-
-            if (SerbianWords.Contains(word))
-            {
-                _selectedSerbianWord = word;
-            }
-            else if (SpanishWords.Contains(word))
-            {
-                _selectedSpanishWord = word;
-            }
-
-            if (!string.IsNullOrEmpty(_selectedSerbianWord) && !string.IsNullOrEmpty(_selectedSpanishWord))
-            {
-                var matchingPair = WordPairs.FirstOrDefault(w => w.Serbian == _selectedSerbianWord && w.Spanish == _selectedSpanishWord);
-
-                if (matchingPair != null)
-                {
-                    matchingPair.IsCorrect = 1;
+                    _selectedSerbianWord.IsCorrect = 1;
+                    _selectedSpanishWord.IsCorrect = 1;
                     Points++;
 
                     Application.Current.Dispatcher.Invoke(async () =>
                     {
-                        await Task.Delay(1000);
-
-                      //  SerbianWords.Remove(_selectedSerbianWord);
-                       // SpanishWords.Remove(_selectedSpanishWord);
-
-                        SerbianWords.Remove(matchingPair.Serbian);
-                        SpanishWords.Remove(matchingPair.Spanish);
-
-                        WordPairs.Remove(matchingPair);
-
-                        
-                        if (!WordPairs.Any())
-                        {
-                            
-                            if (AvailableWordPairs.Any())
-                            {
-                                LoadNextBatch();
-                            }
-                        }
+                        await Task.Delay(500);
+                        WordPairs.Remove(pair);
+                        SerbianWords.Remove(pair.SerbianWord);
+                        SpanishWords.Remove(pair.SpanishWord);
+                        if (!WordPairs.Any() && AvailableWordPairs.Any()) LoadNextBatch();
                     });
                 }
                 else
                 {
-                    // Ako je pogrešan izbor, označimo ga i poništimo izbor posle kratkog vremena
-                    var wrongPair = WordPairs.FirstOrDefault(w => w.Serbian == _selectedSerbianWord || w.Spanish == _selectedSpanishWord);
-                    if (wrongPair != null) wrongPair.IsCorrect = 2; // Pogrešan par (crvena boja)
+                    _selectedSerbianWord.IsCorrect = 2;
+                    _selectedSpanishWord.IsCorrect = 2;
+
+                    var wrongSerbian = _selectedSerbianWord;
+                    var wrongSpanish = _selectedSpanishWord;
 
                     Application.Current.Dispatcher.Invoke(async () =>
                     {
-                        await Task.Delay(1000);
-                        if (wrongPair != null) wrongPair.IsCorrect = 0; // Reset boje
+                        await Task.Delay(500);
+                        wrongSerbian.IsCorrect = 0;
+                        wrongSpanish.IsCorrect = 0;
                     });
                 }
 
                 _selectedSerbianWord = null;
                 _selectedSpanishWord = null;
             }
+        
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
             
             
-            if (TimeRemaining.TotalSeconds > 0)
+            if (TimeRemaining.TotalSeconds > 0 && WordPairs.Any())
             {
-                TimeRemaining = TimeRemaining.Subtract(TimeSpan.FromSeconds(1));
-                OnPropertyChanged(nameof(TimeRemaining));
+                    TimeRemaining = TimeRemaining.Subtract(TimeSpan.FromSeconds(1));
+                    OnPropertyChanged(nameof(TimeRemaining));
+                
             }
             else
             {
+                string message = "";
+               if(!WordPairs.Any())
+            
+                    message = "Čestitam! Pogodili ste sve kombinacije.";
+                else
+                    message = "Vrijeme isteklo!";
                 _timer.Stop();
                 _mainWindow.MainViewModel.Points += Points;
-               
-                GameoverWindow dialog2 = new GameoverWindow(Points, true);
+
+              //  string message = "Vrijeme isteklo!";
+                GameoverWindow dialog2 = new GameoverWindow(Points, true, message);
                 bool? dialogResult2 = dialog2.ShowDialog();
                 if ((bool)dialogResult2)
                 {

@@ -94,8 +94,8 @@ namespace Hablando.ViewModel
             {
                 _timer.Stop();
                 _mainWindow.MainViewModel.Points += Points;
-
-                GameoverWindow dialog2 = new GameoverWindow(Points, false);
+                string message = "Vrijeme isteklo!";
+                GameoverWindow dialog2 = new GameoverWindow(Points, true, message);
                 bool? dialogResult2 = dialog2.ShowDialog();
                 if ((bool)dialogResult2)
                 {
