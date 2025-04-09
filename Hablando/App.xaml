@@ -226,6 +226,56 @@
                 </Style.Triggers>
             </Style>
 
+            <Style x:Key="RestartButtonStyle"
+                   TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="40"
+                                    Height="40"
+                                    CornerRadius="20"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="HorizontalAlignment"
+                        Value="Center" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="Foreground"
+                        Value="White" />
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="Cursor"
+                        Value="Hand" />
+                <Setter Property="Margin"
+                        Value="5px" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="0,1">
+                            <GradientStop Color="{DynamicResource PrimaryColor}"
+                                          Offset="0" />
+                            <GradientStop Color="{DynamicResource SecondaryColor}"
+                                          Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource PanelActiveBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
         </ResourceDictionary>
 
     </Application.Resources>

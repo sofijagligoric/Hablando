@@ -37,8 +37,7 @@ namespace Hablando.ViewModel
         public Dictionary<string, WordPair> WordMap { get; set; } = new Dictionary<string, WordPair>();
         private List<WordPair> AvailableWordPairs { get; set; }
         private const int InitialWordCount = 5;
-       // private string _selectedSerbianWord;
-       // private string _selectedSpanishWord;
+        public ICommand RestartCommand { get; }
 
         public ICommand SelectWordCommand { get; }
         private int _points;
@@ -69,13 +68,15 @@ namespace Hablando.ViewModel
         {
             Points = 0;
             _mainWindow = mainWindow;
-            var dictionary = Application.Current.Resources.MergedDictionaries
-                            .FirstOrDefault(d => d.Contains("SerbianSpanishDictionary"));
+            SerbianWords = new ObservableCollection<SelectableWord>();
+            SpanishWords = new ObservableCollection<SelectableWord>();
+            WordPairs = new ObservableCollection<WordPair>();
+         //   var dictionary = Application.Current.Resources.MergedDictionaries.FirstOrDefault(d => d.Contains("SerbianSpanishDictionary"));
             LoadWords();
 
-            //  SelectWordCommand = new RelayCommand<String>(SelectWord);
+           
             SelectWordCommand = new RelayCommand<SelectableWord>(SelectWord);
-
+            RestartCommand = new RelayCommandWithoutParameters(RestartGame);
 
             TimeRemaining = TimeSpan.FromMinutes(2);
             _timer = new DispatcherTimer
@@ -86,7 +87,20 @@ namespace Hablando.ViewModel
             _timer.Start();
 
         }
-       
+        public void RestartGame()
+        {
+            Points = 0;
+            SerbianWords.Clear();
+            SpanishWords.Clear();
+            WordPairs.Clear();
+            WordMap.Clear();
+            TimeRemaining = TimeSpan.FromMinutes(2);
+            _timer.Stop();
+            _timer.Start();
+            LoadWords();
+        }
+
+
         private void LoadWords()
         {
             var dictionary = Application.Current.Resources.MergedDictionaries
@@ -101,9 +115,11 @@ namespace Hablando.ViewModel
                     return new WordPair(parts[0], parts[1]);
                 }).OrderBy(_ => Guid.NewGuid()).ToList();
 
+                /*
                 WordPairs = new ObservableCollection<WordPair>();
                 SerbianWords = new ObservableCollection<SelectableWord>();
                 SpanishWords = new ObservableCollection<SelectableWord>();
+                */
 
                 LoadNextBatch();
             }

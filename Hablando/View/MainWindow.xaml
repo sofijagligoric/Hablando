@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hablando.View"
         mc:Ignorable="d"
-        Title="Hablando" Height="650" Width="800"
+        Title="Hablando" Height="700" Width="800"
         WindowStartupLocation="CenterScreen">
 
     <Border BorderThickness="0">
