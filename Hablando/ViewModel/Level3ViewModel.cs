@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using Hablando.Model;
+using Hablando.Util;
 using Hablando.View;
 using System;
 using System.Collections.Generic;
@@ -9,19 +10,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace Hablando.ViewModel
 {
-    internal class Level3ViewModel : ViewModelBase, INotifyPropertyChanged
+    public class Level3ViewModel : ViewModelBase, INotifyPropertyChanged
     {
-
         private MainWindow _mainWindow;
 
 
-        public ObservableCollection<WordPair> SRSPDictionary { get; set; }
-        public ObservableCollection<string> SerbianWords { get; set; }
-        public ObservableCollection<string> SpanishWords { get; set; }
+        public QuizItem CurrentQuizItem { get; set; }
+        private List<WordPair> AvailableWordPairs { get; set; }
+        private WordPair _currentWordPair;
+        private string _userInput;
+        public WordPair CurrentWordPair
+        {
+            get => _currentWordPair;
+            set
+            {
+                _currentWordPair = value;
+                OnPropertyChanged(nameof(CurrentWordPair));
+            }
+        }
+
+        public string UserInput
+        {
+            get => _userInput;
+            set
+            {
+                _userInput = value;
+                OnPropertyChanged(nameof(UserInput));
+            }
+        }
+        public ICommand RestartCommand { get; }
+        public ICommand CheckAnswerCommand { get; }
+        public ICommand NextWordCommand { get; }
+
         private int _points;
         public int Points
         {
@@ -48,29 +74,15 @@ namespace Hablando.ViewModel
 
         public Level3ViewModel(MainWindow mainWindow)
         {
-            // Učitavanje reči iz ResourceDictionary
+
             Points = 0;
             _mainWindow = mainWindow;
-            var dictionary = Application.Current.Resources.MergedDictionaries
-                            .FirstOrDefault(d => d.Contains("SerbianSpanishDictionary"));
+            CheckAnswerCommand = new RelayCommandWithoutParameters(CheckAnswer);
+            NextWordCommand = new RelayCommandWithoutParameters(NextWord);
+            RestartCommand = new RelayCommandWithoutParameters(RestartGame);
+            LoadWords();
 
-            /*
-            if (dictionary != null)
-            {
-                var reci = dictionary["SerbianSpanishDictionary"] as string[];
 
-                SRSPDictionary = new ObservableCollection<WordPair>(
-                    reci.Select(r =>
-                    {
-                        var parts = r.Split(',');
-                        return new WordPair { Serbian = parts[0], Spanish = parts[1] };
-                    })
-                );
-
-                SerbianWords = new ObservableCollection<string>(SRSPDictionary.Select(r => r.Serbian).OrderBy(x => Guid.NewGuid()));
-                SpanishWords = new ObservableCollection<string>(SRSPDictionary.Select(r => r.Spanish).OrderBy(x => Guid.NewGuid()));
-            }
-            */
             TimeRemaining = TimeSpan.FromMinutes(2);
             _timer = new DispatcherTimer
             {
@@ -81,20 +93,110 @@ namespace Hablando.ViewModel
 
         }
 
+        public void RestartGame()
+        {
+            Points = 0;
+            TimeRemaining = TimeSpan.FromMinutes(2);
+            _timer.Stop();
+            _timer.Start();
+            LoadWords();
+        }
+
+        private void LoadWords()
+        {
+            var dictionary = Application.Current.Resources.MergedDictionaries
+                             .FirstOrDefault(d => d.Contains("Recnik"));
+
+            if (dictionary != null)
+            {
+                var reci = dictionary["Recnik"] as string[];
+                AvailableWordPairs = reci.Select(r =>
+                {
+                    var parts = r.Split(',');
+                    return new WordPair(parts[0], parts[1]);
+                }).OrderBy(_ => Guid.NewGuid()).ToList();
+
+                NextWord();
+            }
+        }
+
+
+
+        private void NextWord()
+        {
+            UserInput = string.Empty;
+
+            if (AvailableWordPairs.Count == 0)
+            {
+                string message = "Kraj igre!";
+                _timer.Stop();
+                _mainWindow.MainViewModel.Points += Points;
+
+
+                GameoverWindow dialog2 = new GameoverWindow(Points, true, message);
+                bool? dialogResult2 = dialog2.ShowDialog();
+                if ((bool)dialogResult2)
+                {
+                    _mainWindow.MainFrame.Content = new LevelTwoPage(_mainWindow);
+                }
+                else
+                {
+                    _mainWindow.MainFrame.Content = _mainWindow.StartPage;
+                }
+                return;
+            }
+
+            CurrentWordPair = AvailableWordPairs[0];
+            AvailableWordPairs.RemoveAt(0);
+        }
+
+        private void CheckAnswer()
+        {
+            if (string.IsNullOrWhiteSpace(UserInput)) return;
+
+            if (string.Equals(UserInput.Trim(), CurrentWordPair.SpanishWord.Text.Trim(), StringComparison.OrdinalIgnoreCase))
+            {
+                CurrentWordPair.SpanishWord.IsCorrect = 1;
+                Points++;
+                Application.Current.Dispatcher.Invoke(async () =>
+                {
+                    await Task.Delay(800);
+                    AvailableWordPairs.Remove(CurrentWordPair);
+                    NextWord();
+                });
+               
+            }
+            else
+            {
+                CurrentWordPair.SpanishWord.IsCorrect = 2;
+                Application.Current.Dispatcher.Invoke(async () =>
+                {
+                    await Task.Delay(800);
+                    CurrentWordPair.SpanishWord.IsCorrect = 0;
+                });
+            }
+
+        }
+
+
         private void TimerTick(object sender, EventArgs e)
         {
 
-            Points += 1;
+
             if (TimeRemaining.TotalSeconds > 0)
             {
                 TimeRemaining = TimeRemaining.Subtract(TimeSpan.FromSeconds(1));
                 OnPropertyChanged(nameof(TimeRemaining));
+
             }
             else
             {
+                string message = "";
+                message = "Vrijeme isteklo!";
                 _timer.Stop();
                 _mainWindow.MainViewModel.Points += Points;
-                string message = "Vrijeme isteklo!";
+
+
                 GameoverWindow dialog2 = new GameoverWindow(Points, true, message);
                 bool? dialogResult2 = dialog2.ShowDialog();
                 if ((bool)dialogResult2)

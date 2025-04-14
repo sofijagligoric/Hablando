@@ -14,35 +14,8 @@
         
         <util:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Page.Resources>
-    
-    <!--<Border>
-        <Border.Background>
-            <ImageBrush ImageSource="/Images/Background.jpg"
-                         />
-        </Border.Background>
-        <Border CornerRadius="10"
-                BorderThickness="2"
-                Opacity="0.80">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0"
-                                     EndPoint="1,1">
-                    <GradientStop Color="#e8e10c"
-                                  Offset="0" />
-                    <GradientStop Color="#ed6f15"
-                                  Offset="0.75" />
-                    <GradientStop Color="#8f2317"
-                                  Offset="1" />
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,1"
-                                     EndPoint="1,0">
-                    <GradientStop Color="#ed6f15"
-                                  Offset="0" />
-                    <GradientStop Color="#8f2317"
-                                  Offset="1" />
-                </LinearGradientBrush>
-            </Border.Background>-->
+
+
 
     <Grid>
         <Grid>
@@ -54,19 +27,8 @@
             </Image>
         </Grid>
 
-        <!-- Sadržaj koji nije zamagljen -->
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center">
-            <!--
-            <Grid.Background>
-                    <ImageBrush ImageSource="/Images/Background.jpg" />
-                </Grid.Background>
-                <Grid.Effect>
-                    <BlurEffect Radius="0" />
-                </Grid.Effect>
-            -->
-
-
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -77,20 +39,19 @@
             <StackPanel Grid.Row="0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Margin="0,30,0,20"
-                        >
+                        Margin="0,30,0,20">
                 <Label FontSize="80"
-                       Content="Hablando" 
+                       Content="Hablando"
                        HorizontalAlignment="Center"
                        FontFamily="Segoe Print"
                        Foreground="{DynamicResource TitleColorBrush}"
-                       FontWeight="Bold"/>
+                       FontWeight="Bold" />
                 <Label FontSize="30"
                        Content="Zabavi se i nauči!"
                        HorizontalAlignment="Center"
                        FontFamily="Segoe Print"
-                       Foreground="{DynamicResource TitleColorBrush}" 
-                       FontWeight="Bold"/>
+                       Foreground="{DynamicResource TitleColorBrush}"
+                       FontWeight="Bold" />
 
             </StackPanel>
 
@@ -116,10 +77,9 @@
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          Text="{Binding Player, UpdateSourceTrigger=PropertyChanged}"
-                         
-                GotFocus="ImeTextBox_GotFocus"
+                         GotFocus="ImeTextBox_GotFocus"
                          LostFocus="ImeTextBox_LostFocus"
-                         Style="{DynamicResource HintedTextBoxStyle}"/>
+                         Style="{DynamicResource HintedTextBoxStyle}" />
                 <Button Content="Sačuvaj"
                         Command="{Binding SavePlayerCommand}"
                         IsDefault="True"
@@ -131,52 +91,52 @@
                         VerticalAlignment="Center"
                         Width="auto"
                         Grid.Row="1"
-                        Visibility="{Binding IsGameVisible, Converter={StaticResource BoolToVisibilityConverter}}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Igrač:"
+                        Visibility="{Binding IsGameVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Igrač:"
+                           HorizontalAlignment="Left"
+                           FontSize="25"
+                           VerticalAlignment="Center"
+                           Margin="15,0,0,0"
+                           FontWeight="DemiBold"
+                           Foreground="{DynamicResource TitleColorBrush}" />
+                    <TextBlock Text="{Binding Player}"
                                HorizontalAlignment="Left"
                                FontSize="25"
                                VerticalAlignment="Center"
-                               Margin="15,0,0,0"
-                               FontWeight="DemiBold"
-                               Foreground="{DynamicResource TitleColorBrush}" />
-                        <TextBlock Text="{Binding Player}"
-                                   HorizontalAlignment="Left"
-                                   FontSize="25"
-                                   VerticalAlignment="Center"
                                FontWeight="DemiBold"
                                Margin="10,0,0,0"
-                                   TextWrapping="Wrap"
-                                   Foreground="{DynamicResource TitleColorBrush}" />
-           
-                    </StackPanel>
+                               TextWrapping="Wrap"
+                               Foreground="{DynamicResource TitleColorBrush}" />
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Bodovi:"
-                               HorizontalAlignment="Left"
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Bodovi:"
+                           HorizontalAlignment="Left"
                            FontWeight="DemiBold"
                            FontSize="25"
+                           VerticalAlignment="Center"
+                           Margin="15,0,0,0"
+                           Foreground="{DynamicResource TitleColorBrush}" />
+                    <TextBlock Text="{Binding Points}"
+                               HorizontalAlignment="Left"
+                               FontSize="25"
                                VerticalAlignment="Center"
-                               Margin="15,0,0,0"
-                               Foreground="{DynamicResource TitleColorBrush}" />
-                        <TextBlock Text="{Binding Points}"
-                                   HorizontalAlignment="Left"
-                                   FontSize="25"
-                                   VerticalAlignment="Center"
-                                   Margin="10,0,0,0"
+                               Margin="10,0,0,0"
                                FontWeight="DemiBold"
                                TextWrapping="Wrap"
-                                   Foreground="{DynamicResource TitleColorBrush}" />
+                               Foreground="{DynamicResource TitleColorBrush}" />
 
-                    </StackPanel>
-                    <Button Content="Novi igrač"
+                </StackPanel>
+                <Button Content="Novi igrač"
                         Command="{Binding NewPlayerCommand}"
                         Style="{DynamicResource ProceedButtonStyle}"
-                            Margin="0,0,0,10"/>
-                </StackPanel>
-               
+                        Margin="0,0,0,10" />
+            </StackPanel>
 
-           
+
+
             <StackPanel Grid.Row="2"
                         Width="auto"
                         HorizontalAlignment="Center"
@@ -187,15 +147,13 @@
                         Click="Level1ButtonClick" />
                 <Button  Content="Level 2"
                          Style="{DynamicResource Level2ButtonStyle}"
-                         Click="Level2ButtonClick"/>
+                         Click="Level2ButtonClick" />
                 <Button  Content="Level 3"
                          Style="{DynamicResource Level3ButtonStyle}"
-                         Click="Level3ButtonClick"/>
+                         Click="Level3ButtonClick" />
 
             </StackPanel>
 
         </Grid>
     </Grid>
-    <!--</Border>
-    </Border>-->
 </Page>

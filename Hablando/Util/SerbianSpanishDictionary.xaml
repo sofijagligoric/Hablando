@@ -60,6 +60,48 @@
         <System:String>mlijeko,leche</System:String>
         <System:String>kafa,café</System:String>
         <System:String>čaj,té</System:String>
+        <System:String>čokolada,chocolate</System:String>
+        <System:String>sladoled,helado</System:String>
+        <System:String>jaje,huevo</System:String>
+        <System:String>sirće,vinagre</System:String>
+        <System:String>so,sal</System:String>
+        <System:String>šećer,azúcar</System:String>
+        <System:String>nož,cuchillo</System:String>
+        <System:String>viljuška,tenedor</System:String>
+        <System:String>kašika,cuchara</System:String>
+        <System:String>tanjir,plato</System:String>
+        <System:String>čaša,vaso</System:String>
+        <System:String>flaša,botella</System:String>
+        <System:String>frižider,nevera</System:String>
+        <System:String>šporet,estufa</System:String>
+        <System:String>mikrotalasna,microondas</System:String>
+        <System:String>veš mašina,lavadora</System:String>
+        <System:String>tepih,alfombra</System:String>
+        <System:String>ogledalo,espejo</System:String>
+        <System:String>prostorija,habitación</System:String>
+        <System:String>hodnik,pasillo</System:String>
+        <System:String>kupatilo,baño</System:String>
+        <System:String>kuhinja,cocina</System:String>
+        <System:String>dvorište,patio</System:String>
+        <System:String>bašta,jardín</System:String>
+        <System:String>klupa,banco</System:String>
+        <System:String>park,parque</System:String>
+        <System:String>drugačije,diferente</System:String>
+        <System:String>zajedno,juntos</System:String>
+        <System:String>ponovo,otra vez</System:String>
+        <System:String>brzo,rápido</System:String>
+        <System:String>polako,despacio</System:String>
+        <System:String>hladno,frío</System:String>
+        <System:String>toplo,caliente</System:String>
+        <System:String>gladan,hambriento</System:String>
+        <System:String>žedan,sediento</System:String>
+        <System:String>umoran,cansado</System:String>
+        <System:String>veseo,alegre</System:String>
+        <System:String>tužan,triste</System:String>
+        <System:String>ljut,enojado</System:String>
+        <System:String>sretan,feliz</System:String>
+        <System:String>bolestan,enfermo</System:String>
+        <System:String>zdrav,sano</System:String>
 
     </x:Array>
 

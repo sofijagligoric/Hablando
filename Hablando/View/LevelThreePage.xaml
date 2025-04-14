@@ -5,29 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hablando.View"
       mc:Ignorable="d"
+      xmlns:util="clr-namespace:Hablando.Util"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       d:DesignHeight="500"
       d:DesignWidth="800"
       Title="LeveThreePage">
+    <Page.Resources>
 
-    <!--
-    <Border
-            BorderThickness="0">
-        
-        <Border.Background>
-            <LinearGradientBrush StartPoint="0,1"
-                                 EndPoint="1,0">
-                <GradientStop Color="{DynamicResource BackgroundColor1}"
-                              Offset="0" />
-                <GradientStop Color="{DynamicResource BackgroundColor2}"
-                              Offset="1" />
-            </LinearGradientBrush>
-        </Border.Background>
-    -->
+        <util:IntToColorConverter x:Key="IntToColorConverter" />
+    </Page.Resources>
+
     <Grid HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
@@ -91,20 +84,95 @@
         </Grid>
 
 
-        <Label Grid.Row="1"
-               Content="Prevedite riječi na španski jezik."
-               HorizontalAlignment="Center"
-               FontSize="18"
-               Margin="0,0,0,0"
-               VerticalAlignment="Center"
-               Foreground="{DynamicResource TitleColorBrush}" />
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Center"
+              Margin="0,10,0,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="1"
+                   Content="Prevedite riječ na španski jezik."
+                   HorizontalAlignment="Center"
+                   FontSize="22"
+                   Margin="0,0,0,20"
+                   VerticalAlignment="Center"
+                   Foreground="{DynamicResource TitleColorBrush}" />
+            <Button Grid.Row="0"
+                    Style="{DynamicResource RestartButtonStyle}"
+                    ToolTip="Restartuj igru"
+                    Command="{Binding RestartCommand}"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,50,10">
+                <fa:ImageAwesome Icon="RotateRight"
+                                 Width="20"
+                                 Height="20"
+                                 Foreground="White" />
+            </Button>
+        </Grid>
+        <Border BorderThickness="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Grid.Row="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="1,1">
+                    <GradientStop Color="#822319"
+                                  Offset="0" />
+                    <GradientStop Color="#380d08"
+                                  Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Effect>
+                <DropShadowEffect Color="Black"
+                                  Direction="315"
+                                  ShadowDepth="7"
+                                  BlurRadius="10"
+                                  Opacity="0.5" />
+            </Border.Effect>
+
+            <StackPanel Margin="20"
+                        Width="300"
+                        VerticalAlignment="Center">
+                <TextBlock Text="{Binding CurrentWordPair.SerbianWord.Text}"
+                           FontSize="24"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0 20" />
+
+                <TextBox Text="{Binding UserInput, UpdateSourceTrigger=PropertyChanged}"
+                         Background="{Binding CurrentWordPair.SpanishWord.IsCorrect, Converter={StaticResource IntToColorConverter}}"
+                         FontSize="20"
+                         Width="250"
+                         Padding="5"
+                         TextAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Foreground="{DynamicResource TitleColorBrush}"
+                         Margin="0 10" />
+
+            </StackPanel>
+        </Border>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,30">
+            <Button Content="✔ Provjeri"
+                    IsDefault="True"
+                    Style="{DynamicResource ProceedButtonStyle}"
+                    Command="{Binding CheckAnswerCommand}" />
+
+            <Button Content="⏭ Dalje"
+                    Style="{DynamicResource ProceedButtonStyle}"
+                    Command="{Binding NextWordCommand}" />
+        </StackPanel>
         <Button Content="Odustani"
-                Grid.Row="3"
+                Grid.Row="4"
                 Click="CancelButtonClick"
-                Margin="0,10,0,10"
+                Margin="0,10,0,20"
                 Style="{DynamicResource ProceedButtonStyle}" />
 
 
     </Grid>
-    <!--   </Border> -->
 </Page>

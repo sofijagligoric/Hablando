@@ -25,6 +25,16 @@
                 
             </LinearGradientBrush>
 
+            <LinearGradientBrush x:Key="ButtonClickedColor"
+                                 StartPoint="0,0"
+                                 EndPoint="0,1">
+                <GradientStop Color="#91a8b8"
+                              Offset="0" />
+                <GradientStop Color="#a1b7c7"
+                              Offset="1" />
+
+            </LinearGradientBrush>
+
 
             <Style x:Key="ProceedButtonStyle"
                    TargetType="Button">
@@ -62,7 +72,31 @@
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="RenderTransformOrigin"
+                        Value="0.5,0.5" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1"
+                                        ScaleY="1" />
+                    </Setter.Value>
+                </Setter>
                 <Style.Triggers>
+
+
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                 To="1.1"
+                                                 Duration="0:0:0.1"
+                                                 AutoReverse="True" />
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                 To="1.1"
+                                                 Duration="0:0:0.1"
+                                                 AutoReverse="True" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
                     <Trigger Property="IsMouseOver"
                              Value="True">
                         <Setter Property="Background"
@@ -107,13 +141,42 @@
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="RenderTransformOrigin"
+                        Value="0.5,0.5" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1"
+                                        ScaleY="1" />
+                    </Setter.Value>
+                </Setter>
                 <Style.Triggers>
+
+
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                 To="1.1"
+                                                 Duration="0:0:0.1"
+                                                 AutoReverse="True" />
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                 To="1.1"
+                                                 Duration="0:0:0.1"
+                                                 AutoReverse="True" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+              
                     <Trigger Property="IsMouseOver"
                              Value="True">
                         <Setter Property="Background"
                                 Value="{DynamicResource Level1PanelActiveBrush}" />
                     </Trigger>
+
+                  
                 </Style.Triggers>
+                
+                
             </Style>
 
             <Style x:Key="Level2ButtonStyle"
@@ -217,12 +280,31 @@
                 <Setter Property="Margin"
                         Value="0,0,20,10" />
 
+                <Setter Property="RenderTransformOrigin"
+                        Value="0.5,0.5" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1"
+                                        ScaleY="1" />
+                    </Setter.Value>
+                </Setter>
                 <Style.Triggers>
-                    <Trigger Property="IsMouseOver"
-                             Value="True">
-                        <Setter Property="Background"
-                                Value="{DynamicResource Level3PanelActiveBrush}" />
-                    </Trigger>
+                  
+
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                 To="1.1"
+                                                 Duration="0:0:0.1"
+                                                 AutoReverse="True" />
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                 To="1.1"
+                                                 Duration="0:0:0.1"
+                                                 AutoReverse="True" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
                 </Style.Triggers>
             </Style>
 
@@ -266,7 +348,32 @@
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="RenderTransformOrigin"
+                        Value="0.5,0.5" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1"
+                                        ScaleY="1" />
+                    </Setter.Value>
+                </Setter>
                 <Style.Triggers>
+
+
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                 To="1.3"
+                                                 Duration="0:0:0.1"
+                                                 AutoReverse="True" />
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                 To="1.3"
+                                                 Duration="0:0:0.1"
+                                                 AutoReverse="True" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+               
                     <Trigger Property="IsMouseOver"
                              Value="True">
                         <Setter Property="Background"

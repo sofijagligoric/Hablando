@@ -22,12 +22,6 @@ namespace Hablando.ViewModel
     {
 
         private MainWindow _mainWindow;
-
-        /* 
-         
-         public ObservableCollection<string> SerbianWords { get; set; }
-         public ObservableCollection<string> SpanishWords { get; set; }
-        */
         public ObservableCollection<SelectableWord> SerbianWords { get; set; }
         public ObservableCollection<SelectableWord> SpanishWords { get; set; }
         public ObservableCollection<WordPair> WordPairs { get; set; }
@@ -71,7 +65,6 @@ namespace Hablando.ViewModel
             SerbianWords = new ObservableCollection<SelectableWord>();
             SpanishWords = new ObservableCollection<SelectableWord>();
             WordPairs = new ObservableCollection<WordPair>();
-         //   var dictionary = Application.Current.Resources.MergedDictionaries.FirstOrDefault(d => d.Contains("SerbianSpanishDictionary"));
             LoadWords();
 
            
@@ -115,20 +108,32 @@ namespace Hablando.ViewModel
                     return new WordPair(parts[0], parts[1]);
                 }).OrderBy(_ => Guid.NewGuid()).ToList();
 
-                /*
-                WordPairs = new ObservableCollection<WordPair>();
-                SerbianWords = new ObservableCollection<SelectableWord>();
-                SpanishWords = new ObservableCollection<SelectableWord>();
-                */
-
                 LoadNextBatch();
             }
         }
 
         private void LoadNextBatch()
         {
-            if (AvailableWordPairs.Count == 0) return;
-            var nextBatch = AvailableWordPairs.Take(InitialWordCount).ToList();
+            if (AvailableWordPairs.Count == 0)
+            {
+                string message = "Kraj igre!";
+                _timer.Stop();
+                _mainWindow.MainViewModel.Points += Points;
+
+                
+                GameoverWindow dialog2 = new GameoverWindow(Points, true, message);
+                bool? dialogResult2 = dialog2.ShowDialog();
+                if ((bool)dialogResult2)
+                {
+                    _mainWindow.MainFrame.Content = new LevelTwoPage(_mainWindow);
+                }
+                else
+                {
+                    _mainWindow.MainFrame.Content = _mainWindow.StartPage;
+                }
+                return;
+            }
+            var nextBatch = AvailableWordPairs.Take(Math.Min(InitialWordCount, AvailableWordPairs.Count)).ToList();
             AvailableWordPairs.RemoveRange(0, nextBatch.Count);
 
             WordPairs.Clear();
@@ -155,6 +160,7 @@ namespace Hablando.ViewModel
 
             if (SerbianWords.Contains(selected)) _selectedSerbianWord = selected;
             else if (SpanishWords.Contains(selected)) _selectedSpanishWord = selected;
+            selected.IsClicked = 1;
 
             if (_selectedSerbianWord != null && _selectedSpanishWord != null)
             {
@@ -192,6 +198,8 @@ namespace Hablando.ViewModel
                         wrongSpanish.IsCorrect = 0;
                     });
                 }
+                _selectedSerbianWord.IsClicked = 0;
+                _selectedSpanishWord.IsClicked = 0;
 
                 _selectedSerbianWord = null;
                 _selectedSpanishWord = null;
@@ -203,7 +211,7 @@ namespace Hablando.ViewModel
         {
             
             
-            if (TimeRemaining.TotalSeconds > 0 && WordPairs.Any())
+            if (TimeRemaining.TotalSeconds > 0)
             {
                     TimeRemaining = TimeRemaining.Subtract(TimeSpan.FromSeconds(1));
                     OnPropertyChanged(nameof(TimeRemaining));
@@ -211,16 +219,11 @@ namespace Hablando.ViewModel
             }
             else
             {
-                string message = "";
-               if(!WordPairs.Any())
-            
-                    message = "Čestitam! Pogodili ste sve kombinacije.";
-                else
-                    message = "Vrijeme isteklo!";
+               
+                  string message = "Vrijeme isteklo!";
                 _timer.Stop();
                 _mainWindow.MainViewModel.Points += Points;
 
-              //  string message = "Vrijeme isteklo!";
                 GameoverWindow dialog2 = new GameoverWindow(Points, true, message);
                 bool? dialogResult2 = dialog2.ShowDialog();
                 if ((bool)dialogResult2)

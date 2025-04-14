@@ -20,10 +20,6 @@ namespace Hablando.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        /*
-        public string PlayerName { get; set; }
-        public int Points {  get; set; }
-        */
         public StartPage StartPage { get; set; }
         public MainViewModel MainViewModel { get; set; }
 

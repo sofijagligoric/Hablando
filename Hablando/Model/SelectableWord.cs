@@ -18,6 +18,13 @@ namespace Hablando.Model
             set { _isCorrect = value; OnPropertyChanged(nameof(IsCorrect)); }
         }
 
+        private int _isClicked;
+        public int IsClicked
+        {
+            get => _isClicked;
+            set { _isClicked = value; OnPropertyChanged(nameof(IsClicked)); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }

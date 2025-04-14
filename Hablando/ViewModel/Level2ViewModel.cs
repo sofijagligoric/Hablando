@@ -98,28 +98,7 @@ namespace Hablando.ViewModel
             }
         }
 
-        /*
-        private void GenerateNewQuizItem()
-        {
-            if (AvailableWordPairs.Count < 3) return;
-
-            var correctPair = AvailableWordPairs[0];
-            AvailableWordPairs.RemoveAt(0);
-
-            var incorrectOptions = AvailableWordPairs
-                .OrderBy(_ => Guid.NewGuid())
-                .Take(2)
-                .Select(p => p.SpanishWord.Text)
-                .ToList();
-
-            var allOptions = incorrectOptions.Append(correctPair.SpanishWord.Text)
-                                             .OrderBy(_ => Guid.NewGuid())
-                                             .ToList();
-
-            CurrentQuizItem = new QuizItem(correctPair.SerbianWord.Text,correctPair.SpanishWord.Text, allOptions);
-
-            OnPropertyChanged(nameof(CurrentQuizItem));
-        }*/
+      
 
         private void GenerateNewQuizItem()
         {
@@ -129,7 +108,7 @@ namespace Hablando.ViewModel
                 _timer.Stop();
                 _mainWindow.MainViewModel.Points += Points;
 
-                //  string message = "Vrijeme isteklo!";
+                
                 GameoverWindow dialog2 = new GameoverWindow(Points, true, message);
                 bool? dialogResult2 = dialog2.ShowDialog();
                 if ((bool)dialogResult2)
@@ -199,16 +178,11 @@ namespace Hablando.ViewModel
             else
             {
                 string message = "";
-             /*   if (!WordPairs.Any())
-
-                    message = "Čestitam! Pogodili ste sve kombinacije.";
-                else
-             */
                     message = "Vrijeme isteklo!";
                 _timer.Stop();
                 _mainWindow.MainViewModel.Points += Points;
 
-                //  string message = "Vrijeme isteklo!";
+                
                 GameoverWindow dialog2 = new GameoverWindow(Points, true, message);
                 bool? dialogResult2 = dialog2.ShowDialog();
                 if ((bool)dialogResult2)

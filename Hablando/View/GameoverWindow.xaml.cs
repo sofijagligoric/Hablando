@@ -23,7 +23,6 @@ namespace Hablando.View
          public int Points { get; set; }
         public bool HasNextLevel { get; }
         public string Message { get; set; }
-        // private MainWindow _mainWindow;
 
         public GameoverWindow(int points, bool hasNextLevel, string message)
         {
@@ -32,19 +31,16 @@ namespace Hablando.View
             DataContext = this;
             HasNextLevel = hasNextLevel;
             Message = message;
-           // _mainWindow = mainWindow;
         }
 
         private void HomeButtonClicked(object sender, RoutedEventArgs e)
         {
-            // _mainWindow.MainFrame.Content = _mainWindow.StartPage;
             DialogResult = false;
             Close();
         }
 
         private void NextLevelClicked(object sender, RoutedEventArgs e)
         {
-            //_mainWindow.MainFrame.Content = new LevelTwoPage(_mainWindow);
             DialogResult = true;
             Close();
         }

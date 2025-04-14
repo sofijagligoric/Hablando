@@ -21,7 +21,6 @@ namespace Hablando.Model
             {
                 _selectedAnswer = value;
                 OnPropertyChanged(nameof(SelectedAnswer));
-             //   OnPropertyChanged(nameof(IsCorrect));
             }
         }
 
